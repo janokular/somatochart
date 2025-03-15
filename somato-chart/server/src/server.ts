@@ -25,7 +25,7 @@ connectToDatabase(DB_URI)
 
     // start the Express server
     app.listen(5200, () => {
-      console.log(`Server running at http://localhost:5200...`);
+      console.log(`Server running at http://10.23.45.30:5200...`);
     });
   })
   .catch((error) => console.error(error));

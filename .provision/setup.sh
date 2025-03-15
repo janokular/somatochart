@@ -17,6 +17,9 @@ apt-get update
 # Install Node.js and npm
 apt-get install -y nodejs npm
 
+# Install Angular CLI
+npm install -g @angular/cli
+
 # Install gnupg and curl
 apt-get install -y gnupg curl
 
