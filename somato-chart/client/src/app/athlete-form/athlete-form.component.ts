@@ -22,6 +22,7 @@ import { Athlete } from "../athlete";
       flex-direction: column;
       align-items: flex-start;
       padding: 2rem;
+      width: 20rem;
     }
     .mat-mdc-radio-button ~ .mat-mdc-radio-button {
       margin-left: 16px;
@@ -55,7 +56,7 @@ import { Athlete } from "../athlete";
           required
         />
         @if (endo.invalid) {
-        <mat-error>Endomorphy is required.</mat-error>
+        <mat-error>Endomorphy must be in range from 0 to 7.</mat-error>
         }
       </mat-form-field>
 
@@ -69,7 +70,7 @@ import { Athlete } from "../athlete";
           required
         />
         @if (mezo.invalid) {
-        <mat-error>Mezomorphy is required.</mat-error>
+        <mat-error>Mezomorphy must be in range from 0 to 7.</mat-error>
         }
       </mat-form-field>
 
@@ -83,8 +84,26 @@ import { Athlete } from "../athlete";
           required
         />
         @if (ecto.invalid) {
-        <mat-error>Ectomorphy is required.</mat-error>
+        <mat-error>Ectomorphy must be in range from 0 to 7.</mat-error>
         }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Series Symbol</mat-label>
+        <select matNativeControl formControlName="seriesSymbol" required>
+          <option value="circle">Circle</option>
+          <option value="triangle">Triangle</option>
+          <option value="square">Square</option>
+        </select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Series Color</mat-label>
+        <select matNativeControl formControlName="seriesColor" required>
+          <option value="blue">Blue</option>
+          <option value="orange">Orange</option>
+          <option value="purple">Purple</option>
+        </select>
       </mat-form-field>
       <br />
       <button
@@ -109,9 +128,11 @@ export class AthleteFormComponent {
 
   athleteForm = this.formBuilder.group({
     name: ["", [Validators.required, Validators.minLength(3)]],
-    endo: [0, [Validators.required]],
-    mezo: [0, [Validators.required]],
-    ecto: [0, [Validators.required]],
+    endo: [0, [Validators.required, Validators.min(0), Validators.max(7)]],
+    mezo: [0, [Validators.required, Validators.min(0), Validators.max(7)]],
+    ecto: [0, [Validators.required, Validators.min(0), Validators.max(7)]],
+    seriesSymbol: ["circle", [Validators.required]],
+    seriesColor: ["blue", [Validators.required]],
   });
 
   constructor(private formBuilder: FormBuilder) {
@@ -121,6 +142,8 @@ export class AthleteFormComponent {
         endo: this.initialState()?.endo || null,
         mezo: this.initialState()?.mezo || null,
         ecto: this.initialState()?.ecto || null,
+        seriesSymbol: this.initialState()?.seriesSymbol || "circle",
+        seriesColor: this.initialState()?.seriesColor || "blue",
       });
     });
   }
@@ -136,6 +159,12 @@ export class AthleteFormComponent {
   }
   get ecto() {
     return this.athleteForm.get("ecto")!;
+  }
+  get seriesSymbol() {
+    return this.athleteForm.get("seriesSymbol")!;
+  }
+  get seriesColor() {
+    return this.athleteForm.get("seriesColor")!;
   }
 
   submitForm() {
