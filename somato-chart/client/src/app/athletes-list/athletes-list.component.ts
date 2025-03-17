@@ -42,7 +42,7 @@ import { MatCardModule } from "@angular/material/card";
             <td mat-cell *matCellDef="let element">{{ element.ecto }}</td>
           </ng-container>
           <ng-container matColumnDef="col-action">
-            <th mat-header-cell *matHeaderCellDef>Action</th>
+            <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
               <button mat-raised-button [routerLink]="['edit/', element._id]">
                 Edit
@@ -76,6 +76,7 @@ export class AthletesListComponent implements OnInit {
     "col-endo",
     "col-mezo",
     "col-ecto",
+    "col-action",
   ];
 
   constructor(private athletesService: AthleteService) {}

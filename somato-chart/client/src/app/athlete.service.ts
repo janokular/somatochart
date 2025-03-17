@@ -6,7 +6,7 @@ import { HttpClient } from "@angular/common/http";
   providedIn: "root",
 })
 export class AthleteService {
-  private url = "http://localhost:5200";
+  private url = "http://10.23.45.30:5200";
   athletes$ = signal<Athlete[]>([]);
   athlete$ = signal<Athlete>({} as Athlete);
 
