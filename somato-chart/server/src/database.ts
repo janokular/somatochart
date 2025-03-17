@@ -32,15 +32,15 @@ async function applySchemaValidation(db: mongodb.Db) {
         },
         endo: {
           bsonType: "number",
-          description: "'endo' is required and is a string",
+          description: "'endo' is required and is a number",
         },
         mezo: {
           bsonType: "number",
-          description: "'mezo' is required and is a string",
+          description: "'mezo' is required and is a number",
         },
         ecto: {
           bsonType: "number",
-          description: "'ecto' is required and is a string",
+          description: "'ecto' is required and is a number",
         },
       },
     },
