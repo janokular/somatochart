@@ -3,7 +3,6 @@ import {
   Validators,
   ReactiveFormsModule,
   FormBuilder,
-  FormControl,
 } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -144,15 +143,15 @@ export class AthleteFormComponent {
       [Validators.required, Validators.minLength(3)],
     ],
     endo: [
-      new FormControl(),
+      1,
       [Validators.required, Validators.min(1), Validators.max(7)],
     ],
     mezo: [
-      new FormControl(),
+      1,
       [Validators.required, Validators.min(1), Validators.max(7)],
     ],
     ecto: [
-      new FormControl(),
+      1,
       [Validators.required, Validators.min(1), Validators.max(7)],
     ],
     seriesSymbol: ["circle", [Validators.required]],
