@@ -1,9 +1,15 @@
 import { Component, effect, EventEmitter, input, Output } from "@angular/core";
-import { Validators, ReactiveFormsModule, FormBuilder } from "@angular/forms";
+import {
+  Validators,
+  ReactiveFormsModule,
+  FormBuilder,
+  FormControl,
+} from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
 import { Athlete } from "../athlete";
 
 @Component({
@@ -15,6 +21,7 @@ import { Athlete } from "../athlete";
     MatInputModule,
     MatRadioModule,
     MatButtonModule,
+    MatIconModule,
   ],
   styles: `
     .athlete-form {
@@ -53,10 +60,13 @@ import { Athlete } from "../athlete";
           placeholder="Endomorphy"
           formControlName="endo"
           type="number"
+          min="1"
+          max="7"
+          step="0.01"
           required
         />
         @if (endo.invalid) {
-        <mat-error>Endomorphy must be in range from 0 to 7.</mat-error>
+        <mat-error>Endomorphy must be in range from 1 to 7.</mat-error>
         }
       </mat-form-field>
 
@@ -67,10 +77,13 @@ import { Athlete } from "../athlete";
           placeholder="Mezomorphy"
           formControlName="mezo"
           type="number"
+          min="1"
+          max="7"
+          step="0.01"
           required
         />
         @if (mezo.invalid) {
-        <mat-error>Mezomorphy must be in range from 0 to 7.</mat-error>
+        <mat-error>Mezomorphy must be in range from 1 to 7.</mat-error>
         }
       </mat-form-field>
 
@@ -81,10 +94,13 @@ import { Athlete } from "../athlete";
           placeholder="Ectomorphy"
           formControlName="ecto"
           type="number"
+          min="1"
+          max="7"
+          step="0.01"
           required
         />
         @if (ecto.invalid) {
-        <mat-error>Ectomorphy must be in range from 0 to 7.</mat-error>
+        <mat-error>Ectomorphy must be in range from 1 to 7.</mat-error>
         }
       </mat-form-field>
 
@@ -106,12 +122,8 @@ import { Athlete } from "../athlete";
         </select>
       </mat-form-field>
       <br />
-      <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        [disabled]="athleteForm.invalid"
-      >
+      <button mat-raised-button type="submit" [disabled]="athleteForm.invalid">
+        <mat-icon>save</mat-icon>
         Save
       </button>
     </form>
@@ -127,10 +139,22 @@ export class AthleteFormComponent {
   formSubmitted = new EventEmitter<Athlete>();
 
   athleteForm = this.formBuilder.group({
-    name: ["", [Validators.required, Validators.minLength(3)]],
-    endo: [0, [Validators.required, Validators.min(0), Validators.max(7)]],
-    mezo: [0, [Validators.required, Validators.min(0), Validators.max(7)]],
-    ecto: [0, [Validators.required, Validators.min(0), Validators.max(7)]],
+    name: [
+      "",
+      [Validators.required, Validators.minLength(3)],
+    ],
+    endo: [
+      new FormControl(),
+      [Validators.required, Validators.min(1), Validators.max(7)],
+    ],
+    mezo: [
+      new FormControl(),
+      [Validators.required, Validators.min(1), Validators.max(7)],
+    ],
+    ecto: [
+      new FormControl(),
+      [Validators.required, Validators.min(1), Validators.max(7)],
+    ],
     seriesSymbol: ["circle", [Validators.required]],
     seriesColor: ["blue", [Validators.required]],
   });

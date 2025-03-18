@@ -5,11 +5,18 @@ import { RouterModule } from "@angular/router";
 import { MatTableModule } from "@angular/material/table";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: "app-athletes-list",
   standalone: true,
-  imports: [RouterModule, MatTableModule, MatButtonModule, MatCardModule],
+  imports: [
+    RouterModule,
+    MatTableModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+  ],
   styles: [
     `
       table {
@@ -45,13 +52,14 @@ import { MatCardModule } from "@angular/material/card";
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
               <button mat-raised-button [routerLink]="['edit/', element._id]">
+                <mat-icon>edit</mat-icon>
                 Edit
               </button>
               <button
                 mat-raised-button
-                color="warn"
                 (click)="deleteAthlete(element._id || '')"
               >
+                <mat-icon>delete</mat-icon>
                 Delete
               </button>
             </td>
@@ -62,7 +70,7 @@ import { MatCardModule } from "@angular/material/card";
         </table>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="primary" [routerLink]="['new']">
+        <button mat-raised-button [routerLink]="['new']">
           Add a New Athlete
         </button>
       </mat-card-actions>
