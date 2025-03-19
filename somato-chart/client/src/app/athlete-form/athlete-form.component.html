@@ -1,0 +1,88 @@
+<form
+  class="athlete-form"
+  autocomplete="off"
+  [formGroup]="athleteForm"
+  (submit)="submitForm()"
+>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Name" formControlName="name" required />
+    @if (name.invalid) {
+    <mat-error>Name must be at least 3 characters long.</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Endomorphy</mat-label>
+    <input
+      matInput
+      placeholder="Endomorphy"
+      formControlName="endo"
+      type="number"
+      min="1"
+      max="7"
+      step="0.01"
+      required
+    />
+    @if (endo.invalid) {
+    <mat-error>Endomorphy must be in range from 1 to 7.</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Mezomorphy</mat-label>
+    <input
+      matInput
+      placeholder="Mezomorphy"
+      formControlName="mezo"
+      type="number"
+      min="1"
+      max="7"
+      step="0.01"
+      required
+    />
+    @if (mezo.invalid) {
+    <mat-error>Mezomorphy must be in range from 1 to 7.</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Ectomorphy</mat-label>
+    <input
+      matInput
+      placeholder="Ectomorphy"
+      formControlName="ecto"
+      type="number"
+      min="1"
+      max="7"
+      step="0.01"
+      required
+    />
+    @if (ecto.invalid) {
+    <mat-error>Ectomorphy must be in range from 1 to 7.</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Series Symbol</mat-label>
+    <select matNativeControl formControlName="seriesSymbol" required>
+      <option value="circle">Circle</option>
+      <option value="triangle">Triangle</option>
+      <option value="square">Square</option>
+    </select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Series Color</mat-label>
+    <select matNativeControl formControlName="seriesColor" required>
+      <option value="blue">Blue</option>
+      <option value="orange">Orange</option>
+      <option value="purple">Purple</option>
+    </select>
+  </mat-form-field>
+  <br />
+  <button mat-raised-button type="submit" [disabled]="athleteForm.invalid">
+    <mat-icon>save</mat-icon>
+    Save
+  </button>
+</form>

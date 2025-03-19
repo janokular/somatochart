@@ -7,22 +7,10 @@ import { AthleteService } from "../athlete.service";
 
 @Component({
   selector: "app-edit-athlete",
+  templateUrl: "edit-athlete.component.html",
+  styleUrls: [],
   standalone: true,
   imports: [AthleteFormComponent, MatCardModule],
-  template: `
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>Edit an Athlete</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <app-athlete-form
-          [initialState]="athlete()"
-          (formSubmitted)="editAthlete($event)"
-        ></app-athlete-form>
-      </mat-card-content>
-    </mat-card>
-  `,
-  styles: ``,
 })
 export class EditAthleteComponent implements OnInit {
   athlete = {} as WritableSignal<Athlete>;

@@ -7,21 +7,10 @@ import { Athlete } from "../athlete";
 
 @Component({
   selector: "app-add-athlete",
+  templateUrl: "add-athlete.component.html",
+  styleUrls: [],
   standalone: true,
   imports: [AthleteFormComponent, MatCardModule],
-  template: `
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>Add a New Athlete</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <app-athlete-form
-          (formSubmitted)="addAthlete($event)"
-        ></app-athlete-form>
-      </mat-card-content>
-    </mat-card>
-  `,
-  styles: ``,
 })
 export class AddAthleteComponent {
   constructor(private router: Router, private athleteService: AthleteService) {}
