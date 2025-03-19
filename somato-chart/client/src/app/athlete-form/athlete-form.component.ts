@@ -1,9 +1,5 @@
 import { Component, effect, EventEmitter, input, Output } from "@angular/core";
-import {
-  Validators,
-  ReactiveFormsModule,
-  FormBuilder,
-} from "@angular/forms";
+import { Validators, ReactiveFormsModule, FormBuilder } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatRadioModule } from "@angular/material/radio";
@@ -138,24 +134,14 @@ export class AthleteFormComponent {
   formSubmitted = new EventEmitter<Athlete>();
 
   athleteForm = this.formBuilder.group({
-    name: [
-      "",
-      [Validators.required, Validators.minLength(3)],
-    ],
-    endo: [
-      1,
-      [Validators.required, Validators.min(1), Validators.max(7)],
-    ],
-    mezo: [
-      1,
-      [Validators.required, Validators.min(1), Validators.max(7)],
-    ],
-    ecto: [
-      1,
-      [Validators.required, Validators.min(1), Validators.max(7)],
-    ],
+    name: ["", [Validators.required, Validators.minLength(3)]],
+    endo: [1, [Validators.required, Validators.min(1), Validators.max(7)]],
+    mezo: [1, [Validators.required, Validators.min(1), Validators.max(7)]],
+    ecto: [1, [Validators.required, Validators.min(1), Validators.max(7)]],
     seriesSymbol: ["circle", [Validators.required]],
     seriesColor: ["blue", [Validators.required]],
+    xAxisCoordinate: 0,
+    yAxisCoordinate: 0,
   });
 
   constructor(private formBuilder: FormBuilder) {
@@ -167,6 +153,14 @@ export class AthleteFormComponent {
         ecto: this.initialState()?.ecto || null,
         seriesSymbol: this.initialState()?.seriesSymbol || "circle",
         seriesColor: this.initialState()?.seriesColor || "blue",
+        // xAxisCoordinate:
+        //   <number>this.initialState()?.ecto - <number>this.initialState()?.endo,
+        // yAxisCoordinate:
+        //   2 * <number>this.initialState()?.mezo -
+        //   (<number>this.initialState()?.endo +
+        //     <number>this.initialState()?.ecto),
+        xAxisCoordinate: 0,
+        yAxisCoordinate: 0,
       });
     });
   }

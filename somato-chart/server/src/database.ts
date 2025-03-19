@@ -54,6 +54,16 @@ async function applySchemaValidation(db: mongodb.Db) {
             "'seriesColor' is required and is one of 'blue', 'orange', or 'purple'",
           enum: ["blue", "orange", "purple"],
         },
+        xAxisCoordinate: {
+          bsonType: "number",
+          description:
+            "'xAxisCoordinate is a number and it is calculated from 'ecto' - 'endo''",
+        },
+        yAxisCoordinate: {
+          bsonType: "number",
+          description:
+            "'yAxisCoordinate is a number and it is calculated from 2 * 'mezo' - ('endo' + 'ecto')",
+        },
       },
     },
   };
