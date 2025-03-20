@@ -62,7 +62,7 @@ export class AthleteFormComponent {
     this.ecto?.valueChanges.subscribe(() => this.calculateCoordinates());
   }
 
-  calculateCoordinates() {
+  private calculateCoordinates() {
     const endo = this.endo?.value || 0;
     const mezo = this.mezo?.value || 0;
     const ecto = this.ecto?.value || 0;
