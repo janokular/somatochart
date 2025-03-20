@@ -50,16 +50,28 @@ export class AthleteFormComponent {
         ecto: this.initialState()?.ecto || null,
         seriesSymbol: this.initialState()?.seriesSymbol || "circle",
         seriesColor: this.initialState()?.seriesColor || "blue",
-        // xAxisCoordinate:
-        //   <number>this.initialState()?.ecto - <number>this.initialState()?.endo,
-        // yAxisCoordinate:
-        //   2 * <number>this.initialState()?.mezo -
-        //   (<number>this.initialState()?.endo +
-        //     <number>this.initialState()?.ecto),
         xAxisCoordinate: 0,
         yAxisCoordinate: 0,
       });
     });
+  }
+
+  ngOnInit() {
+    this.athleteForm.get("endo")?.valueChanges.subscribe(() => this.calculateCoordinates());
+    this.athleteForm.get("mezo")?.valueChanges.subscribe(() => this.calculateCoordinates());
+    this.athleteForm.get("ecto")?.valueChanges.subscribe(() => this.calculateCoordinates());
+  }
+
+  calculateCoordinates() {
+    const endo = this.athleteForm.get("endo")?.value || 0;
+    const mezo = this.athleteForm.get("mezo")?.value || 0;
+    const ecto = this.athleteForm.get("ecto")?.value || 0;
+
+    const x = ecto - endo;
+    const y = 2 * mezo - (endo + ecto);
+    
+    this.athleteForm.get("xAxisCoordinate")?.setValue(x, { emitEvent: false});
+    this.athleteForm.get("yAxisCoordinate")?.setValue(y, { emitEvent: false})
   }
 
   get name() {
@@ -79,6 +91,12 @@ export class AthleteFormComponent {
   }
   get seriesColor() {
     return this.athleteForm.get("seriesColor")!;
+  }
+  get xAxisCoordinate() {
+    return this.athleteForm.get("xAxisCoordinate");
+  }
+  get yAxisCoordinate() {
+    return this.athleteForm.get("yAxisCoordinate");
   }
 
   submitForm() {
