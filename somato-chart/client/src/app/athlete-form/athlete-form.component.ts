@@ -93,10 +93,10 @@ export class AthleteFormComponent {
     return this.athleteForm.get("seriesColor")!;
   }
   get xAxisCoordinate() {
-    return this.athleteForm.get("xAxisCoordinate");
+    return this.athleteForm.get("xAxisCoordinate")!;
   }
   get yAxisCoordinate() {
-    return this.athleteForm.get("yAxisCoordinate");
+    return this.athleteForm.get("yAxisCoordinate")!;
   }
 
   submitForm() {
