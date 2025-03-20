@@ -57,21 +57,21 @@ export class AthleteFormComponent {
   }
 
   ngOnInit() {
-    this.athleteForm.get("endo")?.valueChanges.subscribe(() => this.calculateCoordinates());
-    this.athleteForm.get("mezo")?.valueChanges.subscribe(() => this.calculateCoordinates());
-    this.athleteForm.get("ecto")?.valueChanges.subscribe(() => this.calculateCoordinates());
+    this.endo?.valueChanges.subscribe(() => this.calculateCoordinates());
+    this.mezo?.valueChanges.subscribe(() => this.calculateCoordinates());
+    this.ecto?.valueChanges.subscribe(() => this.calculateCoordinates());
   }
 
   calculateCoordinates() {
-    const endo = this.athleteForm.get("endo")?.value || 0;
-    const mezo = this.athleteForm.get("mezo")?.value || 0;
-    const ecto = this.athleteForm.get("ecto")?.value || 0;
+    const endo = this.endo?.value || 0;
+    const mezo = this.mezo?.value || 0;
+    const ecto = this.ecto?.value || 0;
 
     const x = ecto - endo;
     const y = 2 * mezo - (endo + ecto);
     
-    this.athleteForm.get("xAxisCoordinate")?.setValue(x, { emitEvent: false});
-    this.athleteForm.get("yAxisCoordinate")?.setValue(y, { emitEvent: false})
+    this.xAxisCoordinate?.setValue(x, { emitEvent: false});
+    this.yAxisCoordinate?.setValue(y, { emitEvent: false})
   }
 
   get name() {
