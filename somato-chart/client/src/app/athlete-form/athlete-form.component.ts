@@ -37,8 +37,8 @@ export class AthleteFormComponent {
     ecto: [1, [Validators.required, Validators.min(1), Validators.max(7)]],
     seriesSymbol: ["circle", [Validators.required]],
     seriesColor: ["blue", [Validators.required]],
-    xAxisCoordinate: 0,
-    yAxisCoordinate: 0,
+    xAxisCoordinate: [0],
+    yAxisCoordinate: [0],
   });
 
   constructor(private formBuilder: FormBuilder) {
