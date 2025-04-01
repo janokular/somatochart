@@ -5,3 +5,7 @@ table {
     margin-right: 1rem;
   }
 }
+
+mat-card {
+  margin-bottom: 1rem;
+}

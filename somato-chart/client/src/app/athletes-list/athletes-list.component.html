@@ -1,5 +1,12 @@
 <mat-card>
   <mat-card-content>
+    <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions">
+    </highcharts-chart>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-content>
     <table mat-table [dataSource]="athletes$()">
       <ng-container matColumnDef="col-name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
@@ -37,6 +44,5 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button [routerLink]="['new']">Add a New Athlete</button>
-    <button mat-raised-button [routerLink]="['chart']">Display Chart</button>
   </mat-card-actions>
 </mat-card>
