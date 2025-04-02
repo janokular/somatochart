@@ -1,8 +1,17 @@
 <mat-card>
   <mat-card-content>
-    <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions">
+    <highcharts-chart
+      [Highcharts]="somatoChart"
+      [options]="chartOptions"
+    >
     </highcharts-chart>
   </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button [routerLink]="['new']">
+      <mat-icon>add_circle</mat-icon>
+      Add Athlete
+    </button>
+  </mat-card-actions>
 </mat-card>
 
 <mat-card>
@@ -42,7 +51,4 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button [routerLink]="['new']">Add a New Athlete</button>
-  </mat-card-actions>
 </mat-card>

@@ -1,4 +1,10 @@
-import { Component, OnInit, WritableSignal } from "@angular/core";
+import {
+  Component,
+  effect,
+  OnInit,
+  signal,
+  WritableSignal,
+} from "@angular/core";
 import { Athlete } from "../athlete";
 import { AthleteService } from "../athlete.service";
 import { RouterModule } from "@angular/router";
@@ -24,7 +30,7 @@ import Highcharts from "highcharts";
   ],
 })
 export class AthletesListComponent implements OnInit {
-  athletes$ = {} as WritableSignal<Athlete[]>;
+  athletes$: WritableSignal<Athlete[]> = signal([]);
   displayedColumns: string[] = [
     "col-name",
     "col-endo",
@@ -32,57 +38,7 @@ export class AthletesListComponent implements OnInit {
     "col-ecto",
     "col-action",
   ];
-
-  constructor(private athletesService: AthleteService) {}
-
-  ngOnInit() {
-    this.fetchAthletes();
-  }
-
-  deleteAthlete(id: string): void {
-    this.athletesService.deleteAthlete(id).subscribe({
-      next: () => this.fetchAthletes(),
-    });
-  }
-
-  private fetchAthletes(): void {
-    this.athletes$ = this.athletesService.athletes$;
-    this.athletesService.getAthletes();
-  }
-
-  Highcharts: typeof Highcharts = Highcharts;
-  updateFlag = false;
-
-  data = [
-    {
-      x: 1,
-      y: 2,
-      name: "test1",
-      marker: {
-        symbol: "circle",
-        fillColor: "blue",
-      },
-    },
-    {
-      x: -1,
-      y: -2,
-      name: "test2",
-      marker: {
-        symbol: "triangle",
-        fillColor: "orange",
-      },
-    },
-    {
-      x: 0,
-      y: 0,
-      name: "test3",
-      marker: {
-        symbol: "square",
-        fillColor: "purple",
-      },
-    },
-  ];
-
+  somatoChart: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options = {
     chart: {
       type: "scatter",
@@ -90,6 +46,7 @@ export class AthletesListComponent implements OnInit {
       height: 750,
       plotBackgroundImage: "assets/chart-background.svg",
       backgroundColor: "#faf9fd",
+      animation: false,
     },
     title: {
       text: "Athletes by body type",
@@ -148,6 +105,49 @@ export class AthletesListComponent implements OnInit {
       },
     },
     colors: ["#646464"],
-    series: [{ type: "scatter", data: this.data }],
+    series: [
+      {
+        type: "scatter",
+        data: [],
+      },
+    ],
   };
+
+  constructor(private athletesService: AthleteService) {
+    this.fetchChartData();
+  }
+
+  ngOnInit() {
+    this.fetchAthletes();
+  }
+
+  deleteAthlete(id: string): void {
+    this.athletesService.deleteAthlete(id).subscribe({
+      next: () => this.fetchAthletes(),
+    });
+  }
+
+  private fetchAthletes(): void {
+    this.athletes$ = this.athletesService.athletes$;
+    this.athletesService.getAthletes();
+  }
+
+  private fetchChartData() {
+    effect(() => {
+      const series = this.chartOptions
+        .series?.[0] as Highcharts.SeriesScatterOptions;
+      if (series) {
+        series.data = this.athletes$().map((athlete) => ({
+          x: athlete.xAxisCoordinate,
+          y: athlete.yAxisCoordinate,
+          name: athlete.name,
+          marker: {
+            symbol: athlete.seriesSymbol,
+            fillColor: athlete.seriesColor,
+          },
+        }));
+        this.chartOptions = { ...this.chartOptions };
+      }
+    });
+  }
 }

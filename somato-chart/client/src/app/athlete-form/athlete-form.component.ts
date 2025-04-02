@@ -50,8 +50,8 @@ export class AthleteFormComponent {
         ecto: this.initialState()?.ecto || null,
         seriesSymbol: this.initialState()?.seriesSymbol || "circle",
         seriesColor: this.initialState()?.seriesColor || "blue",
-        xAxisCoordinate: 0,
-        yAxisCoordinate: 0,
+        xAxisCoordinate: this.initialState()?.xAxisCoordinate || 0,
+        yAxisCoordinate: this.initialState()?.yAxisCoordinate || 0,
       });
     });
   }
