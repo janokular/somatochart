@@ -113,12 +113,11 @@ export class AthletesListComponent implements OnInit {
     ],
   };
 
-  constructor(private athletesService: AthleteService) {
-    this.fetchChartData();
-  }
+  constructor(private athletesService: AthleteService) {}
 
   ngOnInit() {
     this.fetchAthletes();
+    this.loadChartData();
   }
 
   deleteAthlete(id: string): void {
@@ -132,22 +131,22 @@ export class AthletesListComponent implements OnInit {
     this.athletesService.getAthletes();
   }
 
-  private fetchChartData() {
-    effect(() => {
-      const series = this.chartOptions
-        .series?.[0] as Highcharts.SeriesScatterOptions;
-      if (series) {
-        series.data = this.athletes$().map((athlete) => ({
-          x: athlete.xAxisCoordinate,
-          y: athlete.yAxisCoordinate,
-          name: athlete.name,
-          marker: {
-            symbol: athlete.seriesSymbol,
-            fillColor: athlete.seriesColor,
-          },
-        }));
-        this.chartOptions = { ...this.chartOptions };
-      }
-    });
+private loadChartData() {
+    const chartData =  this.athletes$().map((athlete) => ({
+      x: athlete.xAxisCoordinate,
+      y: athlete.yAxisCoordinate,
+      name: athlete.name,
+      marker: {
+        symbol: athlete.seriesSymbol,
+        fillColor: athlete.seriesColor,
+      },
+    }));
+
+    console.log(chartData)
+
+    this.chartOptions.series = [{
+      type: "scatter",
+      data: chartData,
+    }]
   }
 }
