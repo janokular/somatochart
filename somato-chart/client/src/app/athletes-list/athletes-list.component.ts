@@ -131,8 +131,8 @@ export class AthletesListComponent implements OnInit {
     this.athletesService.getAthletes();
   }
 
-private loadChartData() {
-    const chartData =  this.athletes$().map((athlete) => ({
+  private loadChartData() {
+    const chartData = this.athletes$().map((athlete) => ({
       x: athlete.xAxisCoordinate,
       y: athlete.yAxisCoordinate,
       name: athlete.name,
@@ -142,11 +142,13 @@ private loadChartData() {
       },
     }));
 
-    console.log(chartData)
+    console.log(chartData);
 
-    this.chartOptions.series = [{
-      type: "scatter",
-      data: chartData,
-    }]
+    this.chartOptions.series = [
+      {
+        type: "scatter",
+        data: chartData,
+      },
+    ];
   }
 }
