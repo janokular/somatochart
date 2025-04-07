@@ -92,15 +92,7 @@ export class AthletesChartComponent {
   }
 
   private loadChartData() {
-    const chartData = this.athletesService.getAthletes().map((athlete) => ({
-      x: athlete.xAxisCoordinate,
-      y: athlete.yAxisCoordinate,
-      name: athlete.name,
-      marker: {
-        symbol: athlete.seriesSymbol,
-        fillColor: athlete.seriesColor,
-      },
-    }));
+    const chartData = this.athletesService.getAthletes();
 
     console.log(chartData);
 

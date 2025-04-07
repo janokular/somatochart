@@ -1,10 +1,4 @@
-import {
-  Component,
-  effect,
-  OnInit,
-  signal,
-  WritableSignal,
-} from "@angular/core";
+import { Component, OnInit, signal, WritableSignal } from "@angular/core";
 import { Athlete } from "../athlete";
 import { AthleteService } from "../athlete.service";
 import { RouterModule } from "@angular/router";

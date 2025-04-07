@@ -35,10 +35,10 @@ export class AthleteFormComponent {
     endo: [1, [Validators.required, Validators.min(1), Validators.max(7)]],
     mezo: [1, [Validators.required, Validators.min(1), Validators.max(7)]],
     ecto: [1, [Validators.required, Validators.min(1), Validators.max(7)]],
-    seriesSymbol: ["circle", [Validators.required]],
-    seriesColor: ["blue", [Validators.required]],
-    xAxisCoordinate: [0],
-    yAxisCoordinate: [0],
+    symbol: ["circle", [Validators.required]],
+    fillColor: ["blue", [Validators.required]],
+    x: [0],
+    y: [0],
   });
 
   constructor(private formBuilder: FormBuilder) {
@@ -48,10 +48,10 @@ export class AthleteFormComponent {
         endo: this.initialState()?.endo || null,
         mezo: this.initialState()?.mezo || null,
         ecto: this.initialState()?.ecto || null,
-        seriesSymbol: this.initialState()?.seriesSymbol || "circle",
-        seriesColor: this.initialState()?.seriesColor || "blue",
-        xAxisCoordinate: this.initialState()?.xAxisCoordinate || 0,
-        yAxisCoordinate: this.initialState()?.yAxisCoordinate || 0,
+        symbol: this.initialState()?.symbol || "circle",
+        fillColor: this.initialState()?.fillColor || "blue",
+        x: this.initialState()?.x || 0,
+        y: this.initialState()?.y || 0,
       });
     });
   }
@@ -69,9 +69,9 @@ export class AthleteFormComponent {
 
     const x = ecto - endo;
     const y = 2 * mezo - (endo + ecto);
-    
-    this.xAxisCoordinate?.setValue(x, { emitEvent: false});
-    this.yAxisCoordinate?.setValue(y, { emitEvent: false})
+
+    this.x?.setValue(x, { emitEvent: false });
+    this.y?.setValue(y, { emitEvent: false });
   }
 
   get name() {
@@ -86,17 +86,17 @@ export class AthleteFormComponent {
   get ecto() {
     return this.athleteForm.get("ecto")!;
   }
-  get seriesSymbol() {
-    return this.athleteForm.get("seriesSymbol")!;
+  get symbol() {
+    return this.athleteForm.get("symbol")!;
   }
-  get seriesColor() {
-    return this.athleteForm.get("seriesColor")!;
+  get fillColor() {
+    return this.athleteForm.get("fillColor")!;
   }
-  get xAxisCoordinate() {
-    return this.athleteForm.get("xAxisCoordinate")!;
+  get x() {
+    return this.athleteForm.get("x")!;
   }
-  get yAxisCoordinate() {
-    return this.athleteForm.get("yAxisCoordinate")!;
+  get y() {
+    return this.athleteForm.get("y")!;
   }
 
   submitForm() {

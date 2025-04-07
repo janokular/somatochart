@@ -3,9 +3,9 @@ export interface Athlete {
   endo: number;
   mezo: number;
   ecto: number;
-  seriesSymbol: "circle" | "triangle" | "square";
-  seriesColor: "blue" | "orange" | "purple";
-  xAxisCoordinate: number;
-  yAxisCoordinate: number;
+  x: number;
+  y: number;
+  symbol: "circle" | "triangle" | "square";
+  fillColor: "blue" | "orange" | "purple";
   _id?: string;
 }

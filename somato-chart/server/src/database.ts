@@ -9,7 +9,7 @@ export async function connectToDatabase(uri: string) {
   const client = new mongodb.MongoClient(uri);
   await client.connect();
 
-  const db = client.db("meanStackExample");
+  const db = client.db("somatoChart");
   await applySchemaValidation(db);
 
   const athletesCollection = db.collection<Athlete>("athletes");
@@ -22,7 +22,7 @@ async function applySchemaValidation(db: mongodb.Db) {
   const jsonSchema = {
     $jsonSchema: {
       bsonType: "object",
-      required: ["name", "endo", "mezo", "ecto", "seriesSymbol", "seriesColor"],
+      required: ["name", "endo", "mezo", "ecto", "symbol", "fillColor"],
       additionalProperties: false,
       properties: {
         _id: {},
@@ -42,27 +42,27 @@ async function applySchemaValidation(db: mongodb.Db) {
           bsonType: "number",
           description: "'ecto' is required and is a number",
         },
-        seriesSymbol: {
+        symbol: {
           bsonType: "string",
           description:
-            "'seriesSymbol' is required and is one of 'circle', 'triangle', or 'square'",
+            "'symbol' is required and is one of 'circle', 'triangle', or 'square'",
           enum: ["circle", "triangle", "square"],
         },
-        seriesColor: {
+        fillColor: {
           bsonType: "string",
           description:
-            "'seriesColor' is required and is one of 'blue', 'orange', or 'purple'",
+            "'fillColor' is required and is one of 'blue', 'orange', or 'purple'",
           enum: ["blue", "orange", "purple"],
         },
-        xAxisCoordinate: {
+        x: {
           bsonType: "number",
           description:
-            "'xAxisCoordinate is a number and it is calculated from 'ecto' - 'endo''",
+            "'x' is a number and it is calculated from 'ecto' - 'endo''",
         },
-        yAxisCoordinate: {
+        y: {
           bsonType: "number",
           description:
-            "'yAxisCoordinate is a number and it is calculated from 2 * 'mezo' - ('endo' + 'ecto')",
+            "'y' is a number and it is calculated from 2 * 'mezo' - ('endo' + 'ecto')",
         },
       },
     },
