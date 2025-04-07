@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { AthleteService } from "../athlete.service";
 import { MatCardModule } from "@angular/material/card";
 import { HighchartsChartModule } from "highcharts-angular";
@@ -10,7 +10,7 @@ import Highcharts from "highcharts";
   styleUrls: ["athletes-chart.component.css"],
   imports: [MatCardModule, HighchartsChartModule],
 })
-export class AthletesChartComponent {
+export class AthletesChartComponent implements OnInit {
   somatoChart: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options = {
     chart: {
@@ -91,10 +91,18 @@ export class AthletesChartComponent {
     this.loadChartData();
   }
 
-  private loadChartData() {
-    const chartData = this.athletesService.getAthletes();
+  private loadChartData(): void {
+    const chartData = this.athletesService.getAthletes().map((athlete) => ({
+      x: athlete.x,
+      y: athlete.y,
+      name: athlete.name,
+      marker: {
+        symbol: athlete.symbol,
+        fillColor: athlete.fillColor,
+      },
+    }));
 
-    console.log(chartData);
+    console.log("chartData:", chartData);
 
     this.chartOptions.series = [
       {
