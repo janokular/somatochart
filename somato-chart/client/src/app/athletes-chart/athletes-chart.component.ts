@@ -8,6 +8,7 @@ import Highcharts from "highcharts";
   selector: "app-athletes-chart",
   templateUrl: "athletes-chart.component.html",
   styleUrls: ["athletes-chart.component.css"],
+  standalone: true,
   imports: [MatCardModule, HighchartsChartModule],
 })
 export class AthletesChartComponent implements OnInit {

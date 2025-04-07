@@ -4,8 +4,14 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 
 @Component({
   selector: "app-root",
-  standalone: true,
-  imports: [RouterOutlet, MatToolbarModule],
+  template: `
+    <mat-toolbar>
+      <span>SomatoChart</span>
+    </mat-toolbar>
+    <main>
+      <router-outlet />
+    </main>
+  `,
   styles: [
     `
       main {
@@ -15,14 +21,8 @@ import { MatToolbarModule } from "@angular/material/toolbar";
       }
     `,
   ],
-  template: `
-    <mat-toolbar>
-      <span>SomatoChart</span>
-    </mat-toolbar>
-    <main>
-      <router-outlet />
-    </main>
-  `,
+  standalone: true,
+  imports: [RouterOutlet, MatToolbarModule],
 })
 export class AppComponent {
   title = "client";
