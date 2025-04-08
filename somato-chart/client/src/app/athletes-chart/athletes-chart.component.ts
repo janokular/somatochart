@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, effect } from "@angular/core";
 import { AthleteService } from "../athlete.service";
 import { MatCardModule } from "@angular/material/card";
 import { HighchartsChartModule } from "highcharts-angular";
@@ -11,7 +11,7 @@ import Highcharts from "highcharts";
   standalone: true,
   imports: [MatCardModule, HighchartsChartModule],
 })
-export class AthletesChartComponent implements OnInit {
+export class AthletesChartComponent {
   somatoChart: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options = {
     chart: {
@@ -86,30 +86,30 @@ export class AthletesChartComponent implements OnInit {
     ],
   };
 
-  constructor(private athletesService: AthleteService) {}
-
-  ngOnInit() {
+  constructor(private athletesService: AthleteService) {
     this.fetchChartData();
   }
 
   private fetchChartData(): void {
-    const chartData = this.athletesService.getAthletes().map((athlete) => ({
-      x: athlete.x,
-      y: athlete.y,
-      name: athlete.name,
-      marker: {
-        symbol: athlete.symbol,
-        fillColor: athlete.fillColor,
-      },
-    }));
+    effect(() => {
+      const chartData = this.athletesService.athletes$().map((athlete) => ({
+        x: athlete.x,
+        y: athlete.y,
+        name: athlete.name,
+        marker: {
+          symbol: athlete.symbol,
+          fillColor: athlete.fillColor,
+        },
+      }));
 
-    console.log("chartData:", chartData);
+      console.log("chartData:", chartData);
 
-    this.chartOptions.series = [
-      {
-        type: "scatter",
+      this.chartOptions.series = [{
+        type:"scatter",
         data: chartData,
-      },
-    ];
+      }];
+
+      this.chartOptions = { ...this.chartOptions };
+    });
   }
 }
