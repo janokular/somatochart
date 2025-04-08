@@ -89,10 +89,10 @@ export class AthletesChartComponent implements OnInit {
   constructor(private athletesService: AthleteService) {}
 
   ngOnInit() {
-    this.loadChartData();
+    this.fetchChartData();
   }
 
-  private loadChartData(): void {
+  private fetchChartData(): void {
     const chartData = this.athletesService.getAthletes().map((athlete) => ({
       x: athlete.x,
       y: athlete.y,
