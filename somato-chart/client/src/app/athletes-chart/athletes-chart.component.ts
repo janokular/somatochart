@@ -3,6 +3,8 @@ import { AthleteService } from "../athlete.service";
 import { MatCardModule } from "@angular/material/card";
 import { HighchartsChartModule } from "highcharts-angular";
 import Highcharts from "highcharts";
+import "highcharts/modules/exporting";
+import "highcharts/modules/offline-exporting";
 
 @Component({
   selector: "app-athletes-chart",
@@ -78,6 +80,14 @@ export class AthletesChartComponent {
       },
     },
     colors: ["#646464"],
+    exporting: {
+      enabled: true,
+      chartOptions: {
+        chart: {
+          backgroundColor: "#ffffff",
+        },
+      },
+    },
     series: [
       {
         type: "scatter",
@@ -104,10 +114,12 @@ export class AthletesChartComponent {
 
       console.log("chartData:", chartData);
 
-      this.chartOptions.series = [{
-        type:"scatter",
-        data: chartData,
-      }];
+      this.chartOptions.series = [
+        {
+          type: "scatter",
+          data: chartData,
+        },
+      ];
 
       this.chartOptions = { ...this.chartOptions };
     });
