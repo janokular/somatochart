@@ -81,9 +81,17 @@ export class AthletesChartComponent {
     },
     colors: ["#646464"],
     exporting: {
-      enabled: true,
+      buttons: {
+        contextButton: {
+          menuItems: ["downloadPNG", "downloadJPEG", "downloadSVG"],
+          theme: {
+            fill: "#faf9fd",
+          }
+        },
+      },
       chartOptions: {
         chart: {
+          plotBackgroundImage: "assets/chart-background.jpg",
           backgroundColor: "#ffffff",
         },
       },
