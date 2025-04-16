@@ -3,6 +3,7 @@ import { AthleteService } from "../athlete.service";
 import { MatCardModule } from "@angular/material/card";
 import { HighchartsChartModule } from "highcharts-angular";
 import Highcharts from "highcharts";
+import "highcharts/modules/accessibility";
 import "highcharts/modules/exporting";
 import "highcharts/modules/offline-exporting";
 
