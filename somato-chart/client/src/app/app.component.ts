@@ -1,28 +1,14 @@
 import { Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: "app-root",
-  template: `
-    <mat-toolbar>
-      <span>SomatoChart</span>
-    </mat-toolbar>
-    <main>
-      <router-outlet />
-    </main>
-  `,
-  styles: [
-    `
-      main {
-        display: flex;
-        justify-content: center;
-        padding: 2rem 4rem;
-      }
-    `,
-  ],
+  templateUrl: "app.component.html",
+  styleUrls: ["app.component.css"],
   standalone: true,
-  imports: [RouterOutlet, MatToolbarModule],
+  imports: [RouterOutlet, MatToolbarModule, MatIconModule],
 })
 export class AppComponent {
   title = "client";
