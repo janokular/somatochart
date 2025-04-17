@@ -8,7 +8,7 @@
     <mat-label>Name</mat-label>
     <input matInput placeholder="Name" formControlName="name" required />
     @if (name.invalid) {
-    <mat-error>Name must be at least 3 characters long.</mat-error>
+    <mat-error>Name is required.</mat-error>
     }
   </mat-form-field>
 
@@ -19,13 +19,13 @@
       placeholder="Endomorphy"
       formControlName="endo"
       type="number"
-      min="1"
-      max="7"
+      min="0"
+      max="8"
       step="0.01"
       required
     />
     @if (endo.invalid) {
-    <mat-error>Endomorphy must be in range from 1 to 7.</mat-error>
+    <mat-error>Endomorphy must be in range from 0 to 8.</mat-error>
     }
   </mat-form-field>
 
@@ -36,13 +36,13 @@
       placeholder="Mezomorphy"
       formControlName="mezo"
       type="number"
-      min="1"
-      max="7"
+      min="0"
+      max="8"
       step="0.01"
       required
     />
     @if (mezo.invalid) {
-    <mat-error>Mezomorphy must be in range from 1 to 7.</mat-error>
+    <mat-error>Mezomorphy must be in range from 0 to 8.</mat-error>
     }
   </mat-form-field>
 
@@ -53,13 +53,13 @@
       placeholder="Ectomorphy"
       formControlName="ecto"
       type="number"
-      min="1"
-      max="7"
+      min="0"
+      max="8"
       step="0.01"
       required
     />
     @if (ecto.invalid) {
-    <mat-error>Ectomorphy must be in range from 1 to 7.</mat-error>
+    <mat-error>Ectomorphy must be in range from 0 to 8.</mat-error>
     }
   </mat-form-field>
 
@@ -81,7 +81,7 @@
     </select>
   </mat-form-field>
   <br />
-  <button mat-raised-button type="submit" [disabled]="athleteForm.invalid">
+  <button mat-button type="submit" [disabled]="athleteForm.invalid">
     <mat-icon>save</mat-icon>
     Save
   </button>

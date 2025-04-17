@@ -10,7 +10,7 @@ import "highcharts/modules/offline-exporting";
 @Component({
   selector: "app-athletes-chart",
   templateUrl: "athletes-chart.component.html",
-  styleUrls: ["athletes-chart.component.css"],
+  styleUrls: [],
   standalone: true,
   imports: [MatCardModule, HighchartsChartModule],
 })
@@ -57,22 +57,6 @@ export class AthletesChartComponent {
     legend: {
       enabled: false,
     },
-    plotOptions: {
-      scatter: {
-        marker: {
-          states: {
-            hover: {
-              enabled: true,
-              lineColor: "#646464",
-            },
-          },
-        },
-        dataLabels: {
-          enabled: true,
-          format: "{point.name}",
-        },
-      },
-    },
     tooltip: {
       formatter: function () {
         return (
@@ -87,7 +71,7 @@ export class AthletesChartComponent {
           menuItems: ["downloadPNG", "downloadJPEG", "downloadSVG"],
           theme: {
             fill: "#faf9fd",
-          }
+          },
         },
       },
       chartOptions: {

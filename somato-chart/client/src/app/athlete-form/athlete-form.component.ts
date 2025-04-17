@@ -31,10 +31,10 @@ export class AthleteFormComponent {
   formSubmitted = new EventEmitter<Athlete>();
 
   athleteForm = this.formBuilder.group({
-    name: ["", [Validators.required, Validators.minLength(3)]],
-    endo: [1, [Validators.required, Validators.min(1), Validators.max(7)]],
-    mezo: [1, [Validators.required, Validators.min(1), Validators.max(7)]],
-    ecto: [1, [Validators.required, Validators.min(1), Validators.max(7)]],
+    name: ["", [Validators.required]],
+    endo: [0, [Validators.required, Validators.min(0), Validators.max(8)]],
+    mezo: [0, [Validators.required, Validators.min(0), Validators.max(8)]],
+    ecto: [0, [Validators.required, Validators.min(0), Validators.max(8)]],
     symbol: ["circle", [Validators.required]],
     fillColor: ["blue", [Validators.required]],
     x: [0],

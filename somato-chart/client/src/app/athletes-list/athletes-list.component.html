@@ -1,8 +1,8 @@
 <app-athletes-chart></app-athletes-chart>
-
-<mat-card>
+<br />
+<mat-card appearance="outlined">
   <mat-card-actions>
-    <button mat-raised-button [routerLink]="['new']">
+    <button mat-button [routerLink]="['new']">
       <mat-icon>add</mat-icon>
       Add Athlete
     </button>
@@ -28,11 +28,11 @@
       <ng-container matColumnDef="col-action">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-          <button mat-raised-button [routerLink]="['edit/', element._id]">
+          <button mat-button [routerLink]="['edit/', element._id]">
             <mat-icon>edit</mat-icon>
             Edit
           </button>
-          <button mat-raised-button (click)="deleteAthlete(element._id || '')">
+          <button mat-button (click)="deleteAthlete(element._id || '')">
             <mat-icon>delete</mat-icon>
             Delete
           </button>
