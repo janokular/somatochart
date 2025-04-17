@@ -1,6 +1,8 @@
 <mat-toolbar>
   <mat-icon>scatter_plot</mat-icon>
-  <span>SomatoChart</span>
+  <span class="title">SomatoChart</span>
+  <button mat-button [routerLink]="['']">Chart</button>
+  <button mat-button [routerLink]="['']">List</button>
 </mat-toolbar>
 <main>
   <router-outlet />

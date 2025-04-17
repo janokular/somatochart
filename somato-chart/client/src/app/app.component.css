@@ -5,7 +5,8 @@ mat-toolbar {
   z-index: 1000;
 }
 
-mat-icon {
+.title {
+  margin-left: 0.75rem;
   margin-right: 0.75rem;
 }
 
