@@ -5,8 +5,7 @@ mat-toolbar {
   z-index: 1000;
 }
 
-.title {
-  margin-left: 0.75rem;
+.logo {
   margin-right: 0.75rem;
 }
 
