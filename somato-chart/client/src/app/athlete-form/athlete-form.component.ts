@@ -69,8 +69,12 @@ export class AthleteFormComponent {
 
     const factor = 100;
 
-    this.x?.setValue(Math.round((ecto - endo) * factor) / factor, { emitEvent: false });
-    this.y?.setValue(Math.round((2 * mezo - (endo + ecto)) * factor) / factor, { emitEvent: false });
+    this.x?.setValue(Math.round((ecto - endo) * factor) / factor, {
+      emitEvent: false,
+    });
+    this.y?.setValue(Math.round((2 * mezo - (endo + ecto)) * factor) / factor, {
+      emitEvent: false,
+    });
   }
 
   get name() {
