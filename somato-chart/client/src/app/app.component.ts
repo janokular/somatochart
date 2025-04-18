@@ -8,11 +8,7 @@ import { MatIconModule } from "@angular/material/icon";
   templateUrl: "app.component.html",
   styleUrls: ["app.component.css"],
   standalone: true,
-  imports: [
-    RouterOutlet,
-    MatToolbarModule,
-    MatIconModule,
-  ],
+  imports: [RouterOutlet, MatToolbarModule, MatIconModule],
 })
 export class AppComponent {
   title = "client";
