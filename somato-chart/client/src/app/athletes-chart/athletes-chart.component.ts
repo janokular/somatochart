@@ -57,6 +57,9 @@ export class AthletesChartComponent {
     legend: {
       enabled: false,
     },
+    credits: {
+      enabled: false
+    },
     tooltip: {
       formatter: function () {
         return (
