@@ -8,7 +8,8 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "somatochart" do |somatochart|
     somatochart.vm.hostname = "somatochart"
-    somatochart.vm.network "private_network", ip: "10.23.45.30"
+    somatochart.vm.network "forwarded_port", guest: 4200, host: 4200
+    somatochart.vm.network "forwarded_port", guest: 5200, host: 5200
     
     somatochart.vm.provision "shell", path: ".provision/setup.sh"
   end
