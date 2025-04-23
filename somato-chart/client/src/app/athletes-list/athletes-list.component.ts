@@ -34,7 +34,7 @@ export class AthletesListComponent implements OnInit {
 
   constructor(private athletesService: AthleteService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.fetchAthletes();
   }
 

@@ -15,7 +15,7 @@ import { Athlete } from "../athlete";
 export class AddAthleteComponent {
   constructor(private router: Router, private athleteService: AthleteService) {}
 
-  addAthlete(athlete: Athlete) {
+  addAthlete(athlete: Athlete): void {
     this.athleteService.createAthlete(athlete).subscribe({
       next: () => {
         this.router.navigate(["/"]);

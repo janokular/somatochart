@@ -21,7 +21,7 @@ export class EditAthleteComponent implements OnInit {
     private athleteService: AthleteService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get("id");
     if (!id) {
       alert("No id provided");
@@ -31,7 +31,7 @@ export class EditAthleteComponent implements OnInit {
     this.athlete = this.athleteService.athlete$;
   }
 
-  editAthlete(athlete: Athlete) {
+  editAthlete(athlete: Athlete): void {
     this.athleteService
       .updateAthlete(this.athlete()._id || "", athlete)
       .subscribe({

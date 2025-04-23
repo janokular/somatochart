@@ -12,7 +12,7 @@ export class AthleteService {
 
   constructor(private httpClient: HttpClient) {}
 
-  private refreshAthletes() {
+  private refreshAthletes(): void {
     this.httpClient
       .get<Athlete[]>(`${this.url}/athletes`)
       .subscribe((athletes) => {

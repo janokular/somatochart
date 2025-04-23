@@ -56,13 +56,13 @@ export class AthleteFormComponent {
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.endo?.valueChanges.subscribe(() => this.calculateCoordinates());
     this.mezo?.valueChanges.subscribe(() => this.calculateCoordinates());
     this.ecto?.valueChanges.subscribe(() => this.calculateCoordinates());
   }
 
-  private calculateCoordinates() {
+  private calculateCoordinates(): void {
     const endo = this.endo?.value || 0;
     const mezo = this.mezo?.value || 0;
     const ecto = this.ecto?.value || 0;
@@ -102,7 +102,7 @@ export class AthleteFormComponent {
     return this.athleteForm.get("y")!;
   }
 
-  submitForm() {
+  submitForm(): void {
     this.formSubmitted.emit(this.athleteForm.value as Athlete);
   }
 }
