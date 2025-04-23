@@ -6,6 +6,7 @@ import { MatRadioModule } from "@angular/material/radio";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { Athlete } from "../athlete";
+import { CoordinateService } from "../services/coordinate.service";
 
 @Component({
   selector: "app-athlete-form",
@@ -41,7 +42,10 @@ export class AthleteFormComponent {
     y: [0],
   });
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private coodinateService: CoordinateService
+  ) {
     effect(() => {
       this.athleteForm.setValue({
         name: this.initialState()?.name || "",
@@ -57,9 +61,19 @@ export class AthleteFormComponent {
   }
 
   ngOnInit(): void {
-    this.endo?.valueChanges.subscribe(() => this.calculateCoordinates());
-    this.mezo?.valueChanges.subscribe(() => this.calculateCoordinates());
-    this.ecto?.valueChanges.subscribe(() => this.calculateCoordinates());
+    this.subscribeToValueChanges(
+      ["endo", "mezo", "ecto"],
+      this.calculateCoordinates.bind(this)
+    );
+  }
+
+  private subscribeToValueChanges(
+    controls: string[],
+    callback: () => void
+  ): void {
+    controls.forEach((controlName) => {
+      this.athleteForm.get(controlName)?.valueChanges.subscribe(callback);
+    });
   }
 
   private calculateCoordinates(): void {
@@ -67,39 +81,43 @@ export class AthleteFormComponent {
     const mezo = this.mezo?.value || 0;
     const ecto = this.ecto?.value || 0;
 
-    const factor = 100;
+    const { x, y } = this.coodinateService.calculateCoordinates(
+      endo,
+      mezo,
+      ecto
+    );
 
-    this.x?.setValue(Math.round((ecto - endo) * factor) / factor, {
-      emitEvent: false,
-    });
-    this.y?.setValue(Math.round((2 * mezo - (endo + ecto)) * factor) / factor, {
-      emitEvent: false,
-    });
+    this.x?.setValue(x, { emitEvent: false });
+    this.y?.setValue(y, { emitEvent: false });
+  }
+
+  getControl(controlName: string) {
+    return this.athleteForm.get(controlName)!;
   }
 
   get name() {
-    return this.athleteForm.get("name")!;
+    return this.getControl("name");
   }
   get endo() {
-    return this.athleteForm.get("endo")!;
+    return this.getControl("endo");
   }
   get mezo() {
-    return this.athleteForm.get("mezo")!;
+    return this.getControl("mezo");
   }
   get ecto() {
-    return this.athleteForm.get("ecto")!;
+    return this.getControl("ecto");
   }
   get symbol() {
-    return this.athleteForm.get("symbol")!;
+    return this.getControl("symbol");
   }
   get fillColor() {
-    return this.athleteForm.get("fillColor")!;
+    return this.getControl("fillColor");
   }
   get x() {
-    return this.athleteForm.get("x")!;
+    return this.getControl("x");
   }
   get y() {
-    return this.athleteForm.get("y")!;
+    return this.getControl("y");
   }
 
   submitForm(): void {

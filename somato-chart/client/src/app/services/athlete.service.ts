@@ -1,5 +1,5 @@
 import { Injectable, signal } from "@angular/core";
-import { Athlete } from "./athlete";
+import { Athlete } from "../athlete";
 import { HttpClient } from "@angular/common/http";
 
 @Injectable({

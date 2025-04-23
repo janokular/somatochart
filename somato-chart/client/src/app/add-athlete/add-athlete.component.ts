@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { MatCardModule } from "@angular/material/card";
 import { AthleteFormComponent } from "../athlete-form/athlete-form.component";
-import { AthleteService } from "../athlete.service";
+import { AthleteService } from "../services/athlete.service";
 import { Athlete } from "../athlete";
 
 @Component({

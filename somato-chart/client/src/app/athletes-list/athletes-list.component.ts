@@ -1,6 +1,6 @@
 import { Component, OnInit, signal, WritableSignal } from "@angular/core";
 import { Athlete } from "../athlete";
-import { AthleteService } from "../athlete.service";
+import { AthleteService } from "../services/athlete.service";
 import { RouterModule } from "@angular/router";
 import { MatTableModule } from "@angular/material/table";
 import { MatButtonModule } from "@angular/material/button";
@@ -32,20 +32,20 @@ export class AthletesListComponent implements OnInit {
     "col-action",
   ];
 
-  constructor(private athletesService: AthleteService) {}
+  constructor(private athleteService: AthleteService) {}
 
   ngOnInit(): void {
     this.fetchAthletes();
   }
 
   deleteAthlete(id: string): void {
-    this.athletesService.deleteAthlete(id).subscribe({
+    this.athleteService.deleteAthlete(id).subscribe({
       next: () => this.fetchAthletes(),
     });
   }
 
   private fetchAthletes(): void {
-    this.athletes$ = this.athletesService.athletes$;
-    this.athletesService.getAthletes();
+    this.athletes$ = this.athleteService.athletes$;
+    this.athleteService.getAthletes();
   }
 }

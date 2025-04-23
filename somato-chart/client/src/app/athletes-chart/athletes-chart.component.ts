@@ -1,5 +1,5 @@
 import { Component, effect } from "@angular/core";
-import { AthleteService } from "../athlete.service";
+import { AthleteService } from "../services/athlete.service";
 import { MatCardModule } from "@angular/material/card";
 import { HighchartsChartModule } from "highcharts-angular";
 import Highcharts from "highcharts";
@@ -92,13 +92,13 @@ export class AthletesChartComponent {
     ],
   };
 
-  constructor(private athletesService: AthleteService) {
+  constructor(private athleteService: AthleteService) {
     this.fetchChartData();
   }
 
   private fetchChartData(): void {
     effect(() => {
-      const chartData = this.athletesService.athletes$().map((athlete) => ({
+      const chartData = this.athleteService.athletes$().map((athlete) => ({
         x: athlete.x,
         y: athlete.y,
         name: athlete.name,
