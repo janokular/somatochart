@@ -25,6 +25,7 @@ import { AthletesChartComponent } from "../athletes-chart/athletes-chart.compone
 export class AthletesListComponent implements OnInit {
   athletes$: WritableSignal<Athlete[]> = signal([]);
   displayedColumns: string[] = [
+    "col-visibility",
     "col-name",
     "col-endo",
     "col-mezo",

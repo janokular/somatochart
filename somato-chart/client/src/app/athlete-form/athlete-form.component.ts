@@ -2,7 +2,6 @@ import { Component, effect, EventEmitter, input, Output } from "@angular/core";
 import { Validators, ReactiveFormsModule, FormBuilder } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatRadioModule } from "@angular/material/radio";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { Athlete } from "../athlete";
@@ -17,7 +16,6 @@ import { CoordinateService } from "../services/coordinate.service";
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatRadioModule,
     MatButtonModule,
     MatIconModule,
   ],
@@ -40,6 +38,7 @@ export class AthleteFormComponent {
     fillColor: ["blue", [Validators.required]],
     x: [0],
     y: [0],
+    isVisible: [true],
   });
 
   constructor(
@@ -56,6 +55,7 @@ export class AthleteFormComponent {
         fillColor: this.initialState()?.fillColor || "blue",
         x: this.initialState()?.x || 0,
         y: this.initialState()?.y || 0,
+        isVisible: this.initialState()?.isVisible ?? true,
       });
     });
   }
@@ -118,6 +118,14 @@ export class AthleteFormComponent {
   }
   get y() {
     return this.getControl("y");
+  }
+  get isVisible() {
+    return this.getControl("isVisible");
+  }
+
+  toggleVisibility() {
+    const currentValue = this.isVisible.value;
+    this.isVisible.setValue(!currentValue);
   }
 
   submitForm(): void {

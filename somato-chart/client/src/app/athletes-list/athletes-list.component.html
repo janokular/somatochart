@@ -9,6 +9,14 @@
   </mat-card-actions>
   <mat-card-content>
     <table mat-table [dataSource]="athletes$()">
+      <ng-container matColumnDef="col-visibility">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon>{{
+            element.isVisible ? "visibility" : "visibility_off"
+          }}</mat-icon>
+        </td>
+      </ng-container>
       <ng-container matColumnDef="col-name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
         <td mat-cell *matCellDef="let element">{{ element.name }}</td>

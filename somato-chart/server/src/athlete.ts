@@ -9,5 +9,6 @@ export interface Athlete {
   y: number;
   symbol: "circle" | "triangle" | "square";
   fillColor: "blue" | "orange" | "purple";
+  isVisible: boolean;
   _id?: mongodb.ObjectId;
 }

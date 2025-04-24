@@ -98,15 +98,18 @@ export class AthletesChartComponent {
 
   private fetchChartData(): void {
     effect(() => {
-      const chartData = this.athleteService.athletes$().map((athlete) => ({
-        x: athlete.x,
-        y: athlete.y,
-        name: athlete.name,
-        marker: {
-          symbol: athlete.symbol,
-          fillColor: athlete.fillColor,
-        },
-      }));
+      const chartData = this.athleteService
+        .athletes$()
+        .filter((athlete) => athlete.isVisible)
+        .map((athlete) => ({
+          x: athlete.x,
+          y: athlete.y,
+          name: athlete.name,
+          marker: {
+            symbol: athlete.symbol,
+            fillColor: athlete.fillColor,
+          },
+        }));
 
       console.log("chartData:", chartData);
 

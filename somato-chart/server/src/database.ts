@@ -64,6 +64,10 @@ async function applySchemaValidation(db: mongodb.Db) {
           description:
             "'y' is a number and it is calculated from 2 * 'mezo' - ('endo' + 'ecto')",
         },
+        isVisible: {
+          bsonType: "bool",
+          description: "'isVisible' is a boolean and defaults to true",
+        },
       },
     },
   };
