@@ -51,8 +51,8 @@ async function applySchemaValidation(db: mongodb.Db) {
         fillColor: {
           bsonType: "string",
           description:
-            "'fillColor' is required and is one of 'blue', 'orange', or 'purple'",
-          enum: ["blue", "orange", "purple"],
+            "'fillColor' is required and is one of 'blue', 'green', or 'red'",
+          enum: ["blue", "green", "red"],
         },
         x: {
           bsonType: "number",
