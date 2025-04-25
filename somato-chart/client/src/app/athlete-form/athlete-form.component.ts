@@ -1,7 +1,8 @@
 import { Component, effect, EventEmitter, input, Output } from "@angular/core";
 import { Validators, ReactiveFormsModule, FormBuilder } from "@angular/forms";
-import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatSelectModule } from "@angular/material/select";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { Athlete } from "../athlete";
@@ -16,6 +17,7 @@ import { CoordinateService } from "../services/coordinate.service";
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
     MatButtonModule,
     MatIconModule,
   ],
