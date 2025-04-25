@@ -6,7 +6,7 @@ export interface Athlete {
   x: number;
   y: number;
   symbol: "circle" | "triangle" | "square";
-  fillColor: "blue" | "orange" | "purple";
+  fillColor: "blue" | "green" | "red";
   isVisible: boolean;
   _id?: string;
 }
