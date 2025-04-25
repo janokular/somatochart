@@ -123,7 +123,7 @@ export class AthleteFormComponent {
     return this.getControl("isVisible");
   }
 
-  toggleVisibility() {
+  toggleVisibility(): void {
     const currentValue = this.isVisible.value;
     this.isVisible.setValue(!currentValue);
   }
