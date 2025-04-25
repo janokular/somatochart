@@ -2,6 +2,7 @@
   class="athlete-form"
   autocomplete="off"
   [formGroup]="athleteForm"
+  (keydown)="onKeyDown($event)"
   (submit)="submitForm()"
 >
   <button mat-icon-button type="button" (click)="toggleVisibility()">
