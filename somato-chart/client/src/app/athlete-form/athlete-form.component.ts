@@ -130,6 +130,12 @@ export class AthleteFormComponent {
     this.isVisible.setValue(!currentValue);
   }
 
+  onKeyDown(event: KeyboardEvent): void {
+    if (event.key === "Enter") {
+      event.preventDefault();
+    }
+  }
+
   submitForm(): void {
     this.formSubmitted.emit(this.athleteForm.value as Athlete);
   }
