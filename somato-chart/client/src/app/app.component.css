@@ -9,6 +9,11 @@ mat-toolbar {
   margin-right: 0.75rem;
 }
 
+.logo-text {
+  color: black;
+  text-decoration: none;
+}
+
 main {
   display: flex;
   justify-content: center;
