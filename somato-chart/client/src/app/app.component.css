@@ -6,11 +6,12 @@ mat-toolbar {
 }
 
 .logo {
+  color: #000000;
   margin-right: 0.75rem;
 }
 
 .logo-text {
-  color: black;
+  color: #000000;
   text-decoration: none;
 }
 

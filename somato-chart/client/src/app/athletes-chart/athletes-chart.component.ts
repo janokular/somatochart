@@ -71,6 +71,7 @@ export class AthletesChartComponent {
     exporting: {
       buttons: {
         contextButton: {
+          symbolStroke: "#44474e",
           menuItems: ["downloadPNG", "downloadJPEG", "downloadSVG"],
           theme: {
             fill: "#faf9fd",

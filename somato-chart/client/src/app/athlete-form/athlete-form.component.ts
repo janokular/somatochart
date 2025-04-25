@@ -33,9 +33,9 @@ export class AthleteFormComponent {
 
   athleteForm = this.formBuilder.group({
     name: ["", [Validators.required]],
-    endo: [0, [Validators.required, Validators.min(0), Validators.max(8)]],
-    mezo: [0, [Validators.required, Validators.min(0), Validators.max(8)]],
-    ecto: [0, [Validators.required, Validators.min(0), Validators.max(8)]],
+    endo: [0, [Validators.required, Validators.min(1), Validators.max(7)]],
+    mezo: [0, [Validators.required, Validators.min(1), Validators.max(7)]],
+    ecto: [0, [Validators.required, Validators.min(1), Validators.max(7)]],
     symbol: ["circle", [Validators.required]],
     fillColor: ["blue", [Validators.required]],
     x: [0],
