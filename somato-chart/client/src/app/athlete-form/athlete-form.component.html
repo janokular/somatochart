@@ -69,20 +69,20 @@
 
   <mat-form-field>
     <mat-label>Series Symbol</mat-label>
-    <select matNativeControl formControlName="symbol" required>
-      <option value="circle">Circle</option>
-      <option value="triangle">Triangle</option>
-      <option value="square">Square</option>
-    </select>
+    <mat-select matNativeControl formControlName="symbol" required>
+      <mat-option value="circle">Circle</mat-option>
+      <mat-option value="triangle">Triangle</mat-option>
+      <mat-option value="square">Square</mat-option>
+    </mat-select>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Series Color</mat-label>
-    <select matNativeControl formControlName="fillColor" required>
-      <option value="blue">Blue</option>
-      <option value="orange">Orange</option>
-      <option value="purple">Purple</option>
-    </select>
+    <mat-select matNativeControl formControlName="fillColor" required>
+      <mat-option value="blue">Blue</mat-option>
+      <mat-option value="orange">Orange</mat-option>
+      <mat-option value="purple">Purple</mat-option>
+    </mat-select>
   </mat-form-field>
 
   <button mat-icon-button type="submit" [disabled]="athleteForm.invalid">
