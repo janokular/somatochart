@@ -1,5 +1,5 @@
-import { Component, effect } from "@angular/core";
-import { AthleteService } from "../services/athlete.service";
+import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
+import { Athlete } from "../athlete";
 import { MatCardModule } from "@angular/material/card";
 import { HighchartsChartModule } from "highcharts-angular";
 import Highcharts from "highcharts";
@@ -14,7 +14,9 @@ import "highcharts/modules/offline-exporting";
   standalone: true,
   imports: [MatCardModule, HighchartsChartModule],
 })
-export class AthletesChartComponent {
+export class AthletesChartComponent implements OnChanges {
+  @Input() athletes: Athlete[] = [];
+
   somatoChart: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options = {
     chart: {
@@ -93,35 +95,34 @@ export class AthletesChartComponent {
     ],
   };
 
-  constructor(private athleteService: AthleteService) {
-    this.fetchChartData();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes["athletes"]) {
+      this.updateChartData();
+    }
   }
 
-  private fetchChartData(): void {
-    effect(() => {
-      const chartData = this.athleteService
-        .athletes$()
-        .filter((athlete) => athlete.isVisible)
-        .map((athlete) => ({
-          x: athlete.x,
-          y: athlete.y,
-          name: athlete.name,
-          marker: {
-            symbol: athlete.symbol,
-            fillColor: athlete.fillColor,
-          },
-        }));
-
-      console.log("chartData:", chartData);
-
-      this.chartOptions.series = [
-        {
-          type: "scatter",
-          data: chartData,
+  private updateChartData(): void {
+    const chartData = this.athletes
+      .filter((athlete) => athlete.isVisible)
+      .map((athlete) => ({
+        x: athlete.x,
+        y: athlete.y,
+        name: athlete.name,
+        marker: {
+          symbol: athlete.symbol,
+          fillColor: athlete.fillColor,
         },
-      ];
+      }));
 
-      this.chartOptions = { ...this.chartOptions };
-    });
+    console.log("chartData:", chartData);
+
+    this.chartOptions.series = [
+      {
+        type: "scatter",
+        data: chartData,
+      },
+    ];
+
+    this.chartOptions = { ...this.chartOptions };
   }
 }

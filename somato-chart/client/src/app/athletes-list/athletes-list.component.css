@@ -5,13 +5,11 @@ table {
     margin-right: 1rem;
   }
 }
-
 .visibility-marker-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 .visibility-marker {
   color: #44474e;
 }

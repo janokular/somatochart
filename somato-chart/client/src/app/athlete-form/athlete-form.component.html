@@ -5,10 +5,15 @@
   (keydown)="onKeyDown($event)"
   (submit)="submitForm()"
 >
-  <button mat-icon-button type="button" (click)="toggleVisibility()">
+  <button
+    mat-icon-button
+    class="delete-button"
+    type="button"
+    (click)="toggleVisibility()"
+  >
     <mat-icon>{{ isVisible.value ? "visibility" : "visibility_off" }}</mat-icon>
   </button>
-  <br />
+
   <mat-form-field>
     <mat-label>Name</mat-label>
     <input matInput placeholder="Name" formControlName="name" required />
