@@ -10,6 +10,7 @@
     class="delete-button"
     type="button"
     (click)="toggleVisibility()"
+    [disableRipple]="true"
   >
     <mat-icon>{{ isVisible.value ? "visibility" : "visibility_off" }}</mat-icon>
   </button>
@@ -84,14 +85,19 @@
 
   <mat-form-field>
     <mat-label>Series Color</mat-label>
-    <mat-select matNativeControl formControlName="fillColor" required>
+    <mat-select matNativeControl formControlName="color" required>
       <mat-option value="blue">Blue</mat-option>
       <mat-option value="green">Green</mat-option>
       <mat-option value="red">Red</mat-option>
     </mat-select>
   </mat-form-field>
 
-  <button mat-icon-button type="submit" [disabled]="athleteForm.invalid">
+  <button
+    mat-icon-button
+    type="submit"
+    [disabled]="athleteForm.invalid"
+    [disableRipple]="true"
+  >
     <mat-icon>save</mat-icon>
   </button>
 </form>

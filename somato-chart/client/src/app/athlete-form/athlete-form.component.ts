@@ -37,7 +37,7 @@ export class AthleteFormComponent {
     mezo: [0, [Validators.required, Validators.min(1), Validators.max(7)]],
     ecto: [0, [Validators.required, Validators.min(1), Validators.max(7)]],
     symbol: ["circle", [Validators.required]],
-    fillColor: ["blue", [Validators.required]],
+    color: ["blue", [Validators.required]],
     x: [0],
     y: [0],
     isVisible: [true],
@@ -54,7 +54,7 @@ export class AthleteFormComponent {
         mezo: this.initialState()?.mezo || null,
         ecto: this.initialState()?.ecto || null,
         symbol: this.initialState()?.symbol || "circle",
-        fillColor: this.initialState()?.fillColor || "blue",
+        color: this.initialState()?.color || "blue",
         x: this.initialState()?.x || 0,
         y: this.initialState()?.y || 0,
         isVisible: this.initialState()?.isVisible ?? true,
@@ -112,8 +112,8 @@ export class AthleteFormComponent {
   get symbol() {
     return this.getControl("symbol");
   }
-  get fillColor() {
-    return this.getControl("fillColor");
+  get color() {
+    return this.getControl("color");
   }
   get x() {
     return this.getControl("x");

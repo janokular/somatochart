@@ -1,4 +1,10 @@
-import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from "@angular/core";
 import { Athlete } from "../athlete";
 import { MatCardModule } from "@angular/material/card";
 import { HighchartsChartModule } from "highcharts-angular";
@@ -14,7 +20,7 @@ import "highcharts/modules/offline-exporting";
   standalone: true,
   imports: [MatCardModule, HighchartsChartModule],
 })
-export class AthletesChartComponent implements OnChanges {
+export class AthletesChartComponent implements OnInit, OnChanges {
   @Input() athletes: Athlete[] = [];
 
   somatoChart: typeof Highcharts = Highcharts;
@@ -69,7 +75,7 @@ export class AthletesChartComponent implements OnChanges {
         );
       },
     },
-    colors: ["#646464"],
+    colors: ["transparent"],
     exporting: {
       buttons: {
         contextButton: {
@@ -95,6 +101,23 @@ export class AthletesChartComponent implements OnChanges {
     ],
   };
 
+  ngOnInit(): void {
+    Highcharts.setOptions({
+      global: {
+        buttonTheme: {
+          states: {
+            hover: {
+              fill: "transparent",
+            },
+            select: {
+              fill: "transparent",
+            },
+          },
+        },
+      },
+    });
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes["athletes"]) {
       this.updateChartData();
@@ -110,7 +133,8 @@ export class AthletesChartComponent implements OnChanges {
         name: athlete.name,
         marker: {
           symbol: athlete.symbol,
-          fillColor: athlete.fillColor,
+          fillColor: athlete.color,
+          lineColor: athlete.color,
         },
       }));
 

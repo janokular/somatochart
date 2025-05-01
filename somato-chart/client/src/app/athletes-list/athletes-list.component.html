@@ -2,7 +2,7 @@
 <br />
 <mat-card appearance="outlined">
   <mat-card-actions>
-    <button mat-icon-button [routerLink]="['new']">
+    <button mat-icon-button [routerLink]="['new']" [disableRipple]="true">
       <mat-icon>add</mat-icon>
     </button>
   </mat-card-actions>
@@ -42,10 +42,18 @@
       <ng-container matColumnDef="col-action">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button [routerLink]="['edit/', element._id]">
+          <button
+            mat-icon-button
+            [routerLink]="['edit/', element._id]"
+            [disableRipple]="true"
+          >
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button (click)="deleteAthlete(element._id || '')">
+          <button
+            mat-icon-button
+            (click)="deleteAthlete(element._id || '')"
+            [disableRipple]="true"
+          >
             <mat-icon>delete</mat-icon>
           </button>
         </td>

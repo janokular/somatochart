@@ -22,7 +22,7 @@ async function applySchemaValidation(db: mongodb.Db) {
   const jsonSchema = {
     $jsonSchema: {
       bsonType: "object",
-      required: ["name", "endo", "mezo", "ecto", "symbol", "fillColor"],
+      required: ["name", "endo", "mezo", "ecto", "symbol", "color"],
       additionalProperties: false,
       properties: {
         _id: {},
@@ -48,10 +48,10 @@ async function applySchemaValidation(db: mongodb.Db) {
             "'symbol' is required and is one of 'circle', 'triangle', or 'square'",
           enum: ["circle", "triangle", "square"],
         },
-        fillColor: {
+        color: {
           bsonType: "string",
           description:
-            "'fillColor' is required and is one of 'blue', 'green', or 'red'",
+            "'color' is required and is one of 'blue', 'green', or 'red'",
           enum: ["blue", "green", "red"],
         },
         x: {
