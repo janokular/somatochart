@@ -1,9 +1,9 @@
 import {
   Component,
+  effect,
   Input,
-  OnChanges,
   OnInit,
-  SimpleChanges,
+  WritableSignal,
 } from "@angular/core";
 import { Athlete } from "../athlete";
 import { MatCardModule } from "@angular/material/card";
@@ -20,8 +20,8 @@ import "highcharts/modules/offline-exporting";
   standalone: true,
   imports: [MatCardModule, HighchartsChartModule],
 })
-export class AthletesChartComponent implements OnInit, OnChanges {
-  @Input() athletes: Athlete[] = [];
+export class AthletesChartComponent implements OnInit {
+  @Input() athletes!: WritableSignal<Athlete[]>;
 
   somatoChart: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options = {
@@ -101,6 +101,12 @@ export class AthletesChartComponent implements OnInit, OnChanges {
     ],
   };
 
+  constructor() {
+    effect(() => {
+      this.updateChartData(this.athletes());
+    });
+  }
+
   ngOnInit(): void {
     Highcharts.setOptions({
       global: {
@@ -118,14 +124,8 @@ export class AthletesChartComponent implements OnInit, OnChanges {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes["athletes"]) {
-      this.updateChartData();
-    }
-  }
-
-  private updateChartData(): void {
-    const chartData = this.athletes
+  private updateChartData(athletes: Athlete[]): void {
+    const chartData = athletes
       .filter((athlete) => athlete.isVisible)
       .map((athlete) => ({
         x: athlete.x,
