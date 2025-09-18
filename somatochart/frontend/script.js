@@ -59,9 +59,6 @@ document.addEventListener("DOMContentLoaded", function () {
         contextButton: {
           symbolStroke: "#000000",
           menuItems: ["downloadPNG", "downloadJPEG", "downloadSVG"],
-          theme: {
-            fill: "#faf9fd",
-          },
         },
       },
       chartOptions: {
