@@ -71,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
     series: [
       {
         type: "scatter",
+        animation: false,
         data: [
           { x: 1.3, y: 2.3, symbol: "circle", color: "blue" },
           { x: -2.5, y: -4.5, symbol: "circle", color: "blue" },
