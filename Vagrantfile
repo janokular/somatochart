@@ -1,10 +1,10 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "debian/bookworm64"
 
-  config.vm.define "eisschloss" do |eisschloss|
-    eisschloss.vm.hostname = "eisschloss"
-    eisschloss.vm.network "forwarded_port", guest: 3000, host: 3000
+  config.vm.define "somatochart" do |somatochart|
+    somatochart.vm.hostname = "somatochart"
+    somatochart.vm.network "forwarded_port", guest: 3000, host: 3000
 
-    eisschloss.vm.provision "shell", path: ".provision/setup.sh"
+    somatochart.vm.provision "shell", path: ".provision/setup.sh"
   end
 end
