@@ -73,9 +73,9 @@ document.addEventListener("DOMContentLoaded", function () {
         type: "scatter",
         animation: false,
         data: [
-          { x: 1.3, y: 2.3, symbol: "circle", color: "blue" },
-          { x: -2.5, y: -4.5, symbol: "circle", color: "blue" },
-          { x: 2.2, y: 3, symbol: "circle", color: "blue" },
+          { x: 1.3, y: 2.3, symbol: "circle", color: "blue", name: "test_1" },
+          { x: -2.5, y: -4.5, symbol: "circle", color: "blue", name: "test_2" },
+          { x: 2.2, y: 3, symbol: "circle", color: "blue", name: "test_3" },
         ],
       },
     ],
