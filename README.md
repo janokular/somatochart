@@ -1,6 +1,6 @@
 ## SomatoChart
-### Start server
+### Start the application
 ```
 . ./.venv/bin/activate
-python3 server/app.py
+flask run --host=0.0.0.0 --pt=3000
 ```

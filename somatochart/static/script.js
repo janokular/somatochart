@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
       type: "scatter",
       width: 750,
       height: 750,
-      plotBackgroundImage: "assets/chart-background.svg",
+      plotBackgroundImage: "static/assets/chart-background.svg",
       backgroundColor: "#ffffff",
     },
     title: {
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       chartOptions: {
         chart: {
-          plotBackgroundImage: "assets/chart-background.jpg",
+          plotBackgroundImage: "static/assets/chart-background.jpg",
           backgroundColor: "#ffffff",
         },
       },
