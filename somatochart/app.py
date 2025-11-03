@@ -29,40 +29,53 @@ def get_athletes():
     return jsonify(docs)
 
 
-@app.route('/add_athlete', methods=['POST'])
+@app.route('/athletes', methods=['POST'])
 def add_athlete():
-    data = request.get_json()
-    if not data or 'x' not in data or 'y' not in data:
-        return jsonify({'error': 'Invalid input'}), 400
+    try:
+        data = request.get_json()
+        for key in ('endo', 'meso', 'ecto', 'name', 'color'):
+            if key not in data:
+                return jsonify({'error': 'Invalid input'}), 400
 
-    athlete = Athlete(data['x'], data['y'], data['name'], data['color'])
-    athletes.insert_one(athlete.to_dict())
-    return jsonify({'message': 'Athlete added successfully'}), 200
+        athlete = Athlete(data['endo'], 
+                        data['meso'], 
+                        data['ecto'], 
+                        data['name'], 
+                        data['color'])
+        
+        athletes.insert_one(athlete.to_dict())
+        return jsonify({'message': 'Athlete added successfully'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
 
 
-@app.route('/update_athlete/<id>', methods=['PUT'])
+@app.route('/athletes/<id>', methods=['PUT'])
 def update_athlete(id):
-    data = request.get_json()
-    update_fields = {}
-    if 'x' in data: update_fields['x'] = float(data['x'])
-    if 'y' in data: update_fields['y'] = float(data['y'])
-    if 'name' in data: update_fields['name'] = data['name']
-    if 'color' in data: update_fields['color'] = data['color']
+    try:
+        data = request.get_json()
+        # check data
 
-    result = athletes.update_one({'_id': ObjectId(id)}, {'$set': update_fields})
-    if result.modified_count > 0:
-        return jsonify({'message': 'Athlete updated'}), 200
-    return jsonify({'message': 'No changes'}), 404
+        athlete = Athlete(data['endo'], 
+                        data['meso'], 
+                        data['ecto'], 
+                        data['name'], 
+                        data['color'])
+
+        result = athletes.update_one({'_id': ObjectId(id)}, {'$set': athlete.to_dict()})
+        if result.modified_count > 0:
+            return jsonify({'message': 'Athlete updated'}), 200
+        return jsonify({'message': 'No changes'}), 404
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
 
 
-@app.route('/delete_athlete/<id>', methods=['DELETE'])
+@app.route('/athletes/<id>', methods=['DELETE'])
 def delete_athlete(id):
     try:
         result = athletes.delete_one({'_id': ObjectId(id)})
         if result.deleted_count > 0:
             return jsonify({'message': 'Athlete deleted successfully'}), 200
-        else:
-            return jsonify({'message': 'No Athlete found'}), 404
+        return jsonify({'message': 'Athlete not found'}), 404
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 

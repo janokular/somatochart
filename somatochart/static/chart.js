@@ -96,17 +96,19 @@ document.addEventListener("DOMContentLoaded", function () {
     .getElementById("add-athlete-form")
     .addEventListener("submit", function (e) {
       e.preventDefault();
-      const x = e.target.x.value;
-      const y = e.target.y.value;
+      const endo = e.target.endo.value;
+      const meso = e.target.meso.value;
+      const ecto = e.target.ecto.value;
       const name = e.target.name.value;
       const color = e.target.color.value;
 
-      fetch("/add_athlete", {
+      fetch("/athletes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          x: Number(x),
-          y: Number(y),
+          endo: Number(endo),
+          meso: Number(meso),
+          ecto: Number(ecto),
           name,
           color,
         }),
@@ -120,17 +122,19 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("submit", function (e) {
       e.preventDefault();
       const id = e.target.id.value;
-      const x = e.target.x.value;
-      const y = e.target.y.value;
+      const endo = e.target.endo.value;
+      const meso = e.target.meso.value;
+      const ecto = e.target.ecto.value;
       const name = e.target.name.value;
       const color = e.target.color.value;
 
-      fetch(`/update_athlete/${id}`, {
+      fetch(`/athletes/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          x: Number(x),
-          y: Number(y),
+          endo: Number(endo),
+          meso: Number(meso),
+          ecto: Number(ecto),
           name,
           color,
         }),
@@ -145,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault();
       const id = e.target.id.value;
 
-      fetch(`/delete_athlete/${id}`, { method: "DELETE" })
+      fetch(`/athletes/${id}`, { method: "DELETE" })
         .then((res) => res.json())
         .then(() => loadChart());
     });
