@@ -53,7 +53,9 @@ def add_athlete():
 def update_athlete(id):
     try:
         data = request.get_json()
-        # check data
+        for key in ('endo', 'meso', 'ecto', 'name', 'color'):
+            if key not in data:
+                return jsonify({'error': 'Invalid input'}), 400
 
         athlete = Athlete(data['endo'],
                           data['meso'],
@@ -63,7 +65,7 @@ def update_athlete(id):
 
         result = athletes.update_one({'_id': ObjectId(id)}, {'$set': athlete.to_dict()})
         if result.modified_count > 0:
-            return jsonify({'message': 'Athlete updated'}), 200
+            return jsonify({'message': 'Athlete updated successfully'}), 200
         return jsonify({'message': 'No changes'}), 404
     except Exception as e:
         return jsonify({'error': str(e)}), 400
