@@ -13,11 +13,11 @@ class Athlete:
 
     @property
     def x(self):
-        return self.ecto - self.endo
+        return round(self.ecto - self.endo, 2)
     
     @property
     def y(self):
-        return 2 * self.meso - (self.endo + self.ecto)
+        return round(2 * self.meso - (self.endo + self.ecto), 2)
 
     def to_dict(self):
         return {
