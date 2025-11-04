@@ -23,9 +23,9 @@
     <div id="chart"></div>
     <div id="list">
       <form id="add-athlete-form">
-        <input type="number" name="endo" placeholder="ENDO" required />
-        <input type="number" name="meso" placeholder="MESO" required />
-        <input type="number" name="ecto" placeholder="ECTO" required />
+        <input type="number" name="endo" min="1" max="7" step="0.01" placeholder="ENDO" required />
+        <input type="number" name="meso" min="1" max="7" step="0.01" placeholder="MESO" required />
+        <input type="number" name="ecto" min="1" max="7" step="0.01" placeholder="ECTO" required />
         <input type="text" name="name" placeholder="NAME" required />
         <input type="text" name="color" placeholder="COLOR" required />
         <button type="submit">Add</button>
@@ -33,9 +33,9 @@
 
       <form id="update-athlete-form">
         <input type="text" name="id" placeholder="ID" required />
-        <input type="number" name="endo" placeholder="ENDO" required />
-        <input type="number" name="meso" placeholder="MESO" required />
-        <input type="number" name="ecto" placeholder="ECTO" required />
+        <input type="number" name="endo" min="1" max="7" step="0.01" placeholder="ENDO" required />
+        <input type="number" name="meso" min="1" max="7" step="0.01" placeholder="MESO" required />
+        <input type="number" name="ecto" min="1" max="7" step="0.01" placeholder="ECTO" required />
         <input type="text" name="name" placeholder="NAME" required />
         <input type="text" name="color" placeholder="COLOR" required />
         <button type="submit">Update</button>
