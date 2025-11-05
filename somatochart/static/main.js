@@ -106,6 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const name = e.target.name.value;
       const color = e.target.color.value;
       const symbol = e.target.symbol.value;
+      e.target.reset();
 
       fetch("/athletes", {
         method: "POST",
@@ -134,6 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const name = e.target.name.value;
       const color = e.target.color.value;
       const symbol = e.target.symbol.value;
+      e.target.reset();
 
       fetch(`/athletes/${id}`, {
         method: "PUT",
@@ -156,6 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("submit", function (e) {
       e.preventDefault();
       const id = e.target.id.value;
+      e.target.reset();
 
       fetch(`/athletes/${id}`, { method: "DELETE" })
         .then((res) => res.json())
