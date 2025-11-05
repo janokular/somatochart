@@ -75,13 +75,17 @@ function loadChart() {
           {
             type: "scatter",
             animation: false,
-            color: "black",
+            shadow: false,
             data: athletes.map((a) => ({
               _id: a._id,
               x: a.x,
               y: a.y,
               name: a.name,
-              color: a.color,
+              marker: {
+                symbol: a.symbol,
+                fillColor: a.color,
+                lineColor: a.color,
+              },
             })),
           },
         ],
@@ -101,6 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const ecto = e.target.ecto.value;
       const name = e.target.name.value;
       const color = e.target.color.value;
+      const symbol = e.target.symbol.value;
 
       fetch("/athletes", {
         method: "POST",
@@ -111,6 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
           ecto: Number(ecto),
           name,
           color,
+          symbol,
         }),
       })
         .then((res) => res.json())
@@ -127,6 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const ecto = e.target.ecto.value;
       const name = e.target.name.value;
       const color = e.target.color.value;
+      const symbol = e.target.symbol.value;
 
       fetch(`/athletes/${id}`, {
         method: "PUT",
@@ -137,6 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
           ecto: Number(ecto),
           name,
           color,
+          symbol,
         }),
       })
         .then((res) => res.json())

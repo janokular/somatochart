@@ -4,17 +4,19 @@ class Athlete:
                  meso: float,
                  ecto: float,
                  name: str,
-                 color: str):
+                 color: str,
+                 symbol: str):
         self.endo = endo
         self.meso = meso
         self.ecto = ecto
         self.name = name
         self.color = color
+        self.symbol = symbol
 
     @property
     def x(self):
         return round(self.ecto - self.endo, 2)
-    
+
     @property
     def y(self):
         return round(2 * self.meso - (self.endo + self.ecto), 2)
@@ -27,5 +29,6 @@ class Athlete:
             'x': self.x,
             'y': self.y,
             'name': self.name,
-            'color': self.color
+            'color': self.color,
+            'symbol': self.symbol
         }
