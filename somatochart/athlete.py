@@ -5,13 +5,15 @@ class Athlete:
                  ecto: float,
                  name: str,
                  color: str,
-                 symbol: str):
+                 symbol: str,
+                 isVisible: bool):
         self.endo = endo
         self.meso = meso
         self.ecto = ecto
         self.name = name
         self.color = color
         self.symbol = symbol
+        self.isVisible = isVisible
 
     @property
     def x(self):
@@ -30,5 +32,6 @@ class Athlete:
             'y': self.y,
             'name': self.name,
             'color': self.color,
-            'symbol': self.symbol
+            'symbol': self.symbol,
+            'isVisible': self.isVisible
         }
