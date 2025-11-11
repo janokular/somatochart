@@ -76,17 +76,20 @@ function loadChart() {
             type: "scatter",
             animation: false,
             shadow: false,
-            data: athletes.map((a) => ({
-              _id: a._id,
-              x: a.x,
-              y: a.y,
-              name: a.name,
-              marker: {
-                symbol: a.symbol,
-                fillColor: a.color,
-                lineColor: a.color,
-              },
-            })),
+            data: athletes
+              .filter((a) => a.isVisible)
+              .map((a) => ({
+                _id: a._id,
+                x: a.x,
+                y: a.y,
+                name: a.name,
+                marker: {
+                  symbol: a.symbol,
+                  fillColor: a.color,
+                  lineColor: a.color,
+                },
+              })
+            ),
           },
         ],
       });
@@ -97,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
   loadChart();
 
   document
-    .getElementById("add-athlete-form")
+    .getElementById("add-form")
     .addEventListener("submit", function (e) {
       e.preventDefault();
       const endo = e.target.endo.value;
@@ -106,6 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const name = e.target.name.value;
       const color = e.target.color.value;
       const symbol = e.target.symbol.value;
+      var isVisible = document.getElementById("visibilityToggle").checked ? true : false;
       e.target.reset();
 
       fetch("/athletes", {
@@ -118,6 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
           name,
           color,
           symbol,
+          isVisible,
         }),
       })
         .then((res) => res.json())
@@ -125,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
   document
-    .getElementById("update-athlete-form")
+    .getElementById("update-form")
     .addEventListener("submit", function (e) {
       e.preventDefault();
       const id = e.target.id.value;
@@ -135,6 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const name = e.target.name.value;
       const color = e.target.color.value;
       const symbol = e.target.symbol.value;
+      var isVisible = document.getElementById("updateVisibilityToggle").checked ? true : false;
       e.target.reset();
 
       fetch(`/athletes/${id}`, {
@@ -147,6 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
           name,
           color,
           symbol,
+          isVisible,
         }),
       })
         .then((res) => res.json())
@@ -154,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
   document
-    .getElementById("delete-athlete-form")
+    .getElementById("delete-form")
     .addEventListener("submit", function (e) {
       e.preventDefault();
       const id = e.target.id.value;
