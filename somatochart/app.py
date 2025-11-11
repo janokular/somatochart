@@ -15,6 +15,8 @@ client = MongoClient(mongo_uri)
 db = client['somatochart']
 athletes = db['athletes']
 
+REQUIRED_FIELDS = ['endo', 'meso', 'ecto', 'name', 'color', 'symbol', 'isVisible']
+
 
 @app.route('/')
 def index_page():
@@ -33,7 +35,7 @@ def get_athletes():
 def add_athlete():
     try:
         data = request.get_json()
-        for key in ('endo', 'meso', 'ecto', 'name', 'color', 'symbol'):
+        for key in REQUIRED_FIELDS:
             if key not in data:
                 return jsonify({'error': 'Invalid input'}), 400
 
@@ -42,7 +44,8 @@ def add_athlete():
                           data['ecto'],
                           data['name'],
                           data['color'],
-                          data['symbol'])
+                          data['symbol'],
+                          data['isVisible'])
         
         athletes.insert_one(athlete.to_dict())
         return jsonify({'message': 'Athlete added successfully'}), 200
@@ -54,7 +57,7 @@ def add_athlete():
 def update_athlete(id):
     try:
         data = request.get_json()
-        for key in ('endo', 'meso', 'ecto', 'name', 'color', 'symbol'):
+        for key in REQUIRED_FIELDS:
             if key not in data:
                 return jsonify({'error': 'Invalid input'}), 400
 
@@ -63,7 +66,8 @@ def update_athlete(id):
                           data['ecto'],
                           data['name'],
                           data['color'],
-                          data['symbol'])
+                          data['symbol'],
+                          data['isVisible'])
 
         result = athletes.update_one({'_id': ObjectId(id)}, {'$set': athlete.to_dict()})
         if result.modified_count > 0:
