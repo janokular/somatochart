@@ -22,7 +22,7 @@
   <body>
     <div id="chart"></div>
     <div id="list">
-      <form id="add-athlete-form">
+      <form id="add-form">
         <input
           type="number"
           name="endo"
@@ -51,20 +51,21 @@
           required
         />
         <input type="text" name="name" placeholder="Name" required />
-        <select type="text" name="color" required>
+        <select type="text" name="color">
           <option value="blue">Blue</option>
           <option value="green">Green</option>
           <option value="red">Red</option>
         </select>
-        <select type="text" name="symbol" required>
+        <select type="text" name="symbol">
           <option value="circle">Circle</option>
           <option value="square">Square</option>
           <option value="triangle">Triangle</option>
         </select>
+        <input type="checkbox" id="visibilityToggle" checked />
         <button type="submit">Add</button>
       </form>
 
-      <form id="update-athlete-form">
+      <form id="update-form">
         <input type="text" name="id" placeholder="ID" required />
         <input
           type="number"
@@ -94,20 +95,21 @@
           required
         />
         <input type="text" name="name" placeholder="Name" required />
-        <select type="text" name="color" required>
+        <select type="text" name="color">
           <option value="blue">Blue</option>
           <option value="green">Green</option>
           <option value="red">Red</option>
         </select>
-        <select type="text" name="symbol" required>
+        <select type="text" name="symbol">
           <option value="circle">Circle</option>
           <option value="square">Square</option>
           <option value="triangle">Triangle</option>
         </select>
+        <input type="checkbox" id="updateVisibilityToggle" />
         <button type="submit">Update</button>
       </form>
 
-      <form id="delete-athlete-form">
+      <form id="delete-form">
         <input type="text" name="id" placeholder="ID" required />
         <button type="submit">Delete</button>
       </form>
