@@ -28,11 +28,11 @@ def get_athletes():
     try:
         athletes = list(athletes_collection.find({}))
         if athletes:
-            for d in athletes:
-                d['_id'] = str(d['_id'])
+            for a in athletes:
+                a['_id'] = str(a['_id'])
             return jsonify(athletes), 200
     except Exception as e:
-        return jsonify({'error': str(e)}), 400
+        return jsonify({'error': str(e)}), 500
 
 
 @app.route('/athletes/<id>', methods=['GET'])
@@ -42,8 +42,9 @@ def get_athlete(id):
         if athlete:
             athlete['_id'] = str(athlete['_id'])
             return jsonify(athlete), 200
+        return jsonify({'error': 'Athlete not found'}), 404
     except Exception as e:
-        return jsonify({'error': str(e)}), 400
+        return jsonify({'error': str(e)}), 500
 
 
 @app.route('/athletes', methods=['POST'])
@@ -65,7 +66,7 @@ def add_athlete():
         athletes_collection.insert_one(athlete.to_dict())
         return jsonify({'message': 'Athlete added successfully'}), 200
     except Exception as e:
-        return jsonify({'error': str(e)}), 400
+        return jsonify({'error': str(e)}), 500
 
 
 @app.route('/athletes/<id>', methods=['PUT'])
@@ -87,9 +88,9 @@ def update_athlete(id):
         result = athletes_collection.update_one({'_id': ObjectId(id)}, {'$set': athlete.to_dict()})
         if result.modified_count > 0:
             return jsonify({'message': 'Athlete updated successfully'}), 200
-        return jsonify({'message': 'No changes'}), 404
+        return jsonify({'message': 'No changes'}), 304
     except Exception as e:
-        return jsonify({'error': str(e)}), 400
+        return jsonify({'error': str(e)}), 500
 
 
 @app.route('/athletes/<id>', methods=['DELETE'])
@@ -98,9 +99,9 @@ def delete_athlete(id):
         result = athletes_collection.delete_one({'_id': ObjectId(id)})
         if result.deleted_count > 0:
             return jsonify({'message': 'Athlete deleted successfully'}), 200
-        return jsonify({'message': 'Athlete not found'}), 404
+        return jsonify({'error': 'Athlete not found'}), 404
     except Exception as e:
-        return jsonify({'error': str(e)}), 400
+        return jsonify({'error': str(e)}), 500
 
 
 if __name__ == '__main__':
