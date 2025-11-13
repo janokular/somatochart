@@ -9,6 +9,9 @@ function loadChart() {
           height: 750,
           plotBackgroundImage: "static/assets/chart-background.svg",
           backgroundColor: "#ffffff",
+          style: {
+            "fontFamily": "monospace",
+          },
         },
         title: {
           text: "SomatoChart",
@@ -50,9 +53,10 @@ function loadChart() {
           enabled: false,
         },
         tooltip: {
+          enabled: false,
           formatter: function () {
             return (
-              "<b>" + this.name + "</b><br/>x: " + this.x + "<br/>y: " + this.y
+              `<b>${this.name}</b><br/>x: ${this.x}<br/>y: ${this.y}`
             );
           },
         },
@@ -92,6 +96,13 @@ function loadChart() {
             ),
           },
         ],
+      });
+
+      const list = document.getElementById("list");
+      athletes.forEach(a => {
+        const li = document.createElement("li");
+        li.textContent = `${a._id},${a.name},${a.endo},${a.meso},${a.ecto},${a.color},${a.symbol}`;
+        list.appendChild(li);
       });
     });
 }
