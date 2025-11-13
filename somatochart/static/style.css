@@ -1,3 +1,8 @@
+body {
+  font-family: monospace;
+  font-size: 1rem;
+}
+
 #chart {
   margin: auto;
   width: 750px;
@@ -5,8 +10,24 @@
 }
 
 #list {
+  margin: auto;
+  width: 750px;
+  margin-top: 15px;
+  list-style: none;
 }
 
-form {
+#list li {
+  border-bottom: 1px solid #ccc;
+}
+
+#add-form {
+  margin-top: 5px;
+}
+
+#update-form {
+  margin-top: 5px;
+}
+
+#delete-form {
   margin-top: 5px;
 }
