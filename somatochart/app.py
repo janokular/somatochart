@@ -27,10 +27,9 @@ def index_page():
 def get_athletes():
     try:
         athletes = list(athletes_collection.find({}))
-        if athletes:
-            for a in athletes:
-                a['_id'] = str(a['_id'])
-            return jsonify(athletes), 200
+        for a in athletes:
+            a['_id'] = str(a['_id'])
+        return jsonify(athletes), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
