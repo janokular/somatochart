@@ -20,14 +20,12 @@ body {
   border-bottom: 1px solid #ccc;
 }
 
-#add-form {
-  margin-top: 5px;
+#list button {
+  font-family: monospace;
+  margin-left: 10px;
 }
 
-#update-form {
-  margin-top: 5px;
-}
-
-#delete-form {
+/* todo */
+form {
   margin-top: 5px;
 }
