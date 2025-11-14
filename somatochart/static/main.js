@@ -1,4 +1,4 @@
-function loadChart() {
+function loadChartAndList() {
   fetch("/athletes")
     .then((res) => res.json())
     .then((athletes) => {
@@ -20,7 +20,7 @@ function loadChart() {
           },
           align: "left",
         },
-        xAxis: {
+        xAxis: [{
           title: {
             text: "ectomorphy - endomorphy",
           },
@@ -32,8 +32,13 @@ function loadChart() {
           minorTickLength: 0,
           lineColor: "#ccc",
           lineWidth: 1,
-        },
-        yAxis: {
+        }, {
+          title: "",
+          lineColor: "#ccc",
+          lineWidth: 1,
+          opposite: true,
+        }],
+        yAxis: [{
           title: {
             text: "2 * mesomorphy - (endomorphy + ectomorphy)",
           },
@@ -45,20 +50,17 @@ function loadChart() {
           minorTickLength: 0,
           lineColor: "#ccc",
           lineWidth: 1,
-        },
+        }, {
+          title: "",
+          lineColor: "#ccc",
+          lineWidth: 1,
+          opposite: true,
+        }],
         legend: {
           enabled: false,
         },
         credits: {
           enabled: false,
-        },
-        tooltip: {
-          enabled: false,
-          formatter: function () {
-            return (
-              `<b>${this.name}</b><br/>x: ${this.x}<br/>y: ${this.y}`
-            );
-          },
         },
         colors: ["transparent"],
         exporting: {
@@ -79,7 +81,7 @@ function loadChart() {
           {
             type: "scatter",
             animation: false,
-            shadow: false,
+            enableMouseTracking: false,
             data: athletes
               .filter((a) => a.isVisible)
               .map((a) => ({
@@ -99,16 +101,34 @@ function loadChart() {
       });
 
       const list = document.getElementById("list");
+      list.innerHTML = "";
       athletes.forEach(a => {
         const li = document.createElement("li");
-        li.textContent = `${a._id},${a.name},${a.endo},${a.meso},${a.ecto},${a.color},${a.symbol}`;
+        li.textContent = `${a.name} ${a.endo} ${a.meso} ${a.ecto} ${a.color} ${a.symbol} ${a.isVisible}`;
+
+        const updateBtn = document.createElement("button");
+        updateBtn.textContent = "Update";
+        updateBtn.addEventListener("click", () => {
+          console.log(`updated ${a._id}`);
+        });
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+        deleteBtn.addEventListener("click", () => {
+          fetch(`/athletes/${a._id}`, { method: "DELETE" })
+            .then((res) => res.json())
+            .then(() => loadChartAndList());
+        });
+
+        li.appendChild(updateBtn);
+        li.appendChild(deleteBtn);
         list.appendChild(li);
       });
     });
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  loadChart();
+  loadChartAndList();
 
   document
     .getElementById("add-form")
@@ -137,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }),
       })
         .then((res) => res.json())
-        .then(() => loadChart());
+        .then(() => loadChartAndList());
     });
 
   document
@@ -168,18 +188,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }),
       })
         .then((res) => res.json())
-        .then(() => loadChart());
-    });
-
-  document
-    .getElementById("delete-form")
-    .addEventListener("submit", function (e) {
-      e.preventDefault();
-      const id = e.target.id.value;
-      e.target.reset();
-
-      fetch(`/athletes/${id}`, { method: "DELETE" })
-        .then((res) => res.json())
-        .then(() => loadChart());
+        .then(() => loadChartAndList());
     });
 });
