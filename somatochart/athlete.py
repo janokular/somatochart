@@ -1,16 +1,16 @@
 class Athlete:
     def __init__(self,
+                 name: str,
                  endo: float,
                  meso: float,
                  ecto: float,
-                 name: str,
                  color: str,
                  symbol: str,
                  isVisible: bool):
+        self.name = name
         self.endo = endo
         self.meso = meso
         self.ecto = ecto
-        self.name = name
         self.color = color
         self.symbol = symbol
         self.isVisible = isVisible
@@ -25,12 +25,12 @@ class Athlete:
 
     def to_dict(self):
         return {
+            'name': self.name,
             'endo': self.endo,
             'meso': self.meso,
             'ecto': self.ecto,
             'x': self.x,
             'y': self.y,
-            'name': self.name,
             'color': self.color,
             'symbol': self.symbol,
             'isVisible': self.isVisible
