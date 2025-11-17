@@ -9,11 +9,39 @@ body {
   height: 750px;
 }
 
+#controlPanel {
+  margin: auto;
+  width: 750px;
+}
+
+#controlPanel button {
+  font-family: monospace;
+}
+
+#addForm {
+  margin: auto;
+  width: 750px;
+  margin-top: 5px;
+}
+
+#addForm input {
+  font-family: monospace;
+}
+
+#addForm select {
+  font-family: monospace;
+}
+
+#addForm button {
+  font-family: monospace;
+}
+
 #list {
   margin: auto;
   width: 750px;
   margin-top: 15px;
   list-style: none;
+  padding-left: 0;
 }
 
 #list li {
@@ -23,9 +51,4 @@ body {
 #list button {
   font-family: monospace;
   margin-left: 10px;
-}
-
-/* todo */
-form {
-  margin-top: 5px;
 }
