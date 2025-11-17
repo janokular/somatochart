@@ -15,7 +15,7 @@ client = MongoClient(mongo_uri)
 db = client['somatochart']
 athletes_collection = db['athletes']
 
-REQUIRED_FIELDS = ['endo', 'meso', 'ecto', 'name', 'color', 'symbol', 'isVisible']
+REQUIRED_FIELDS = ['name', 'endo', 'meso', 'ecto', 'color', 'symbol', 'isVisible']
 
 
 @app.route('/')
@@ -54,10 +54,10 @@ def add_athlete():
             if key not in data:
                 return jsonify({'error': 'Invalid input'}), 400
 
-        athlete = Athlete(data['endo'],
+        athlete = Athlete(data['name'],
+                          data['endo'],
                           data['meso'],
                           data['ecto'],
-                          data['name'],
                           data['color'],
                           data['symbol'],
                           data['isVisible'])
@@ -76,10 +76,10 @@ def update_athlete(id):
             if key not in data:
                 return jsonify({'error': 'Invalid input'}), 400
 
-        athlete = Athlete(data['endo'],
+        athlete = Athlete(data['name'],
+                          data['endo'],
                           data['meso'],
                           data['ecto'],
-                          data['name'],
                           data['color'],
                           data['symbol'],
                           data['isVisible'])
@@ -87,6 +87,17 @@ def update_athlete(id):
         result = athletes_collection.update_one({'_id': ObjectId(id)}, {'$set': athlete.to_dict()})
         if result.modified_count > 0:
             return jsonify({'message': 'Athlete updated successfully'}), 200
+        return jsonify({'message': 'No changes'}), 304
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+
+@app.route('/athletes', methods=['DELETE'])
+def delete_athletes():
+    try:
+        result = athletes_collection.delete_many({})
+        if result.deleted_count > 0:
+            return jsonify({'message': 'Database cleared succesfully'}), 200
         return jsonify({'message': 'No changes'}), 304
     except Exception as e:
         return jsonify({'error': str(e)}), 500
