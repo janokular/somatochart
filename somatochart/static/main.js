@@ -122,7 +122,7 @@ function loadData() {
       });
 
       document
-        .getElementById("download")
+        .getElementById("downloadBtn")
         .addEventListener("click", () => {   
           chart.exportChart({
             type: 'image/png',
@@ -197,7 +197,7 @@ document.addEventListener("DOMContentLoaded", function () {
   //   });
   
   document
-    .getElementById("clear")
+    .getElementById("clearBtn")
     .addEventListener("click", () => {
       fetch('/athletes', {
         method: "DELETE"
