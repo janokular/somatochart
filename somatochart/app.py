@@ -4,7 +4,8 @@ from flask import jsonify
 from flask import request
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-from athlete import Athlete
+from models.athlete import Athlete
+from validators.request_validator import validate_user_request
 import os
 
 
@@ -14,8 +15,6 @@ mongo_uri = os.getenv('MONGO_URI', 'mongodb://localhost:27017')
 client = MongoClient(mongo_uri)
 db = client['somatochart']
 athletes_collection = db['athletes']
-
-REQUIRED_FIELDS = ['name', 'endo', 'meso', 'ecto', 'color', 'symbol', 'isVisible']
 
 
 @app.route('/')
@@ -50,9 +49,9 @@ def get_athlete(id):
 def add_athlete():
     try:
         data = request.get_json()
-        for key in REQUIRED_FIELDS:
-            if key not in data:
-                return jsonify({'error': 'Invalid input'}), 400
+        errors = validate_user_request(data)
+        if errors:
+            return jsonify({'errors': errors}), 400
 
         athlete = Athlete(data['name'],
                           data['endo'],
@@ -72,9 +71,9 @@ def add_athlete():
 def update_athlete(id):
     try:
         data = request.get_json()
-        for key in REQUIRED_FIELDS:
-            if key not in data:
-                return jsonify({'error': 'Invalid input'}), 400
+        errors = validate_user_request(data)
+        if errors:
+            return jsonify({'errors': errors}), 400
 
         athlete = Athlete(data['name'],
                           data['endo'],
