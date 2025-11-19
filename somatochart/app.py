@@ -87,18 +87,19 @@ def update_athlete(id):
         result = athletes_collection.update_one({'_id': ObjectId(id)}, {'$set': athlete.to_dict()})
         if result.modified_count > 0:
             return jsonify({'message': 'Athlete updated successfully'}), 200
-        return jsonify({'message': 'No changes'}), 304
+        return jsonify({'error': 'No changes identical data'}), 300
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
+
 
 @app.route('/athletes', methods=['DELETE'])
 def delete_athletes():
     try:
-        result = athletes_collection.delete_many({})
-        if result.deleted_count > 0:
-            return jsonify({'message': 'Database cleared succesfully'}), 200
-        return jsonify({'message': 'No changes'}), 304
+        if athletes_collection.count_documents({}) > 0:
+            result = athletes_collection.delete_many({})
+            if result.deleted_count > 0:
+                return jsonify({'message': 'Database cleared succesfully'}), 200
+        return jsonify({'message': 'Database is already cleared'}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
