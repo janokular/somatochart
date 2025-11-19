@@ -125,7 +125,7 @@ function loadData() {
         .getElementById("downloadBtn")
         .addEventListener("click", () => {   
           chart.exportChart({
-            type: 'image/png',
+            type: 'image/jpg',
             filename: 'somatochart',
           });
         });
@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       fetch("/athletes", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json; charset=utf-8" },
         body: JSON.stringify({
           name,
           endo: Number(endo),
@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //     fetch(`/athletes/${id}`, {
   //       method: "PUT",
-  //       headers: { "Content-Type": "application/json" },
+  //       headers: { "Content-Type": "application/json; charset=utf-8" },
   //       body: JSON.stringify({
   //         name,
   //         endo: Number(endo),
