@@ -3,13 +3,13 @@ from flask import request
 from flask import render_template
 from flask import jsonify
 from bson.objectid import ObjectId
-from app.db import db
+from app.db import get_collection
 from app.athlete import Athlete
 from app.request_validator import validate_user_request
 
 
 routes = Blueprint('routes', __name__)
-athletes_collection = db.athletes
+athletes_collection = get_collection('athletes')
 
 
 @routes.route('/')
