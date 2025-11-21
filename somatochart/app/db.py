@@ -9,4 +9,4 @@ def get_db():
 
 def get_collection(name):
     db = get_db()
-    return db[name] 
+    return db.get_collection(name)
