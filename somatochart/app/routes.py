@@ -1,14 +1,15 @@
 from flask import Blueprint
-from flask import current_app
 from flask import request
 from flask import render_template
 from flask import jsonify
 from bson.objectid import ObjectId
+from app.db import db
 from app.athlete import Athlete
 from app.request_validator import validate_user_request
 
 
 routes = Blueprint('routes', __name__)
+athletes_collection = db.athletes
 
 
 @routes.route('/')
@@ -19,7 +20,6 @@ def index_page():
 @routes.route('/athletes', methods=['GET'])
 def get_athletes():
     try:
-        athletes_collection = current_app.athletes_collection
         athletes = list(athletes_collection.find({}))
         for a in athletes:
             a['_id'] = str(a['_id'])
@@ -31,7 +31,6 @@ def get_athletes():
 @routes.route('/athletes/<id>', methods=['GET'])
 def get_athlete(id):
     try:
-        athletes_collection = current_app.athletes_collection
         athlete = athletes_collection.find_one({'_id': ObjectId(id)})
         if athlete:
             athlete['_id'] = str(athlete['_id'])
@@ -44,7 +43,6 @@ def get_athlete(id):
 @routes.route('/athletes', methods=['POST'])
 def add_athlete():
     try:
-        athletes_collection = current_app.athletes_collection
         data = request.get_json()
         errors = validate_user_request(data)
         if errors:
@@ -67,7 +65,6 @@ def add_athlete():
 @routes.route('/athletes/<id>', methods=['PUT'])
 def update_athlete(id):
     try:
-        athletes_collection = current_app.athletes_collection
         data = request.get_json()
         errors = validate_user_request(data)
         if errors:
@@ -92,7 +89,6 @@ def update_athlete(id):
 @routes.route('/athletes', methods=['DELETE'])
 def delete_athletes():
     try:
-        athletes_collection = current_app.athletes_collection
         if athletes_collection.count_documents({}) > 0:
             result = athletes_collection.delete_many({})
             if result.deleted_count > 0:
@@ -105,7 +101,6 @@ def delete_athletes():
 @routes.route('/athletes/<id>', methods=['DELETE'])
 def delete_athlete(id):
     try:
-        athletes_collection = current_app.athletes_collection
         result = athletes_collection.delete_one({'_id': ObjectId(id)})
         if result.deleted_count > 0:
             return jsonify({'message': 'Athlete deleted successfully'}), 200
