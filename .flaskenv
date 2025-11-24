@@ -1,0 +1,2 @@
+FLASK_APP=somatochart
+FLASK_DEBUG=True
