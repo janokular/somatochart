@@ -2,7 +2,7 @@
 ### Start the application
 ```
 . ./.venv/bin/activate
-flask run --port=3000
+flask run
 ```
 
 ### curl
