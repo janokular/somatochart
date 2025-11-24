@@ -1,2 +1,3 @@
 FLASK_APP=somatochart
 FLASK_DEBUG=True
+FLASK_RUN_PORT=3000
