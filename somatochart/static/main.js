@@ -100,7 +100,7 @@ function loadData() {
       list.innerHTML = "";
       athletes.forEach(a => {
         const li = document.createElement("li");
-        li.textContent = `${a.name} endo: ${a.endo} meso: ${a.meso} ecto: ${a.ecto} ${a.color} ${a.symbol} ${a.isVisible}`;
+        li.textContent = `${a.name} endo:${a.endo} meso:${a.meso} ecto:${a.ecto} ${a.color} ${a.symbol} ${a.isVisible}`;
 
         // const updateBtn = document.createElement("button");
         // updateBtn.textContent = "Update";
@@ -125,8 +125,8 @@ function loadData() {
         .getElementById("downloadBtn")
         .addEventListener("click", () => {   
           chart.exportChart({
-            type: 'image/jpg',
-            filename: 'somatochart',
+            type: "image/jpg",
+            filename: "somatochart",
           });
         });
     });
@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .getElementById("clearBtn")
     .addEventListener("click", () => {
-      fetch('/athletes', {
+      fetch("/athletes", {
         method: "DELETE"
       })
         .then((res) => res.json())
