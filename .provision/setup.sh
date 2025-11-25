@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Setup script for installing MOngoDB on Debian VM
+# Setup script for installing MngoDB
+# and Python packages on Debian VM
 
 # Check if script was run with sudo privileges
 if [[ $(id -u) -ne 0 ]]; then
@@ -13,13 +14,13 @@ apt-get update
 apt-get install -y curl gnupg python3.11-venv
 
 # Create an environment
-python3 -m venv /vagrant/somatochart/.venv
+python3 -m venv /vagrant/.venv
 
 # Activate the environment
-. /vagrant/somatochart/.venv/bin/activate
+. /vagrant/.venv/bin/activate
 
 # Install requirements.txt
-pip install -r /vagrant/somatochart/requirements.txt
+pip install -r /vagrant/requirements.txt
 
 # Quit from a Python virtual environment
 deactivate
