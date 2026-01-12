@@ -1,8 +1,8 @@
 def validate_user_request(data):
     REQUIRED_FIELDS = ['name', 'endo', 'meso', 'ecto', 'color', 'symbol', 'isVisible']
     MAX_NAME_LEN = 20
-    MAX_ENDO_MESO_ECTO = 7
-    MIN_ENDO_MESO_ECTO = 1
+    MAX_ENDO_MESO_ECTO = 8
+    MIN_ENDO_MESO_ECTO = 0
     POINT_COLORS = ['blue', 'red', 'green']
     POINT_SYMBOLS = ['circle', 'square', 'triangle']
     
