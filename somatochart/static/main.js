@@ -14,7 +14,7 @@ function loadData() {
           },
         },
         title: {
-          text: " ",
+          text: "SomatoChart",
           align: "left",
         },
         xAxis: [
