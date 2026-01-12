@@ -22,25 +22,25 @@ def validate_user_request(data):
                                 f'{key}: {data[key]} must be a string of max length {MAX_NAME_LEN}'
                             )
                 case 'endo':
-                    if not isinstance(data[key], int) \
+                    if not isinstance(data[key], float) \
                         or data[key] > MAX_ENDO_MESO_ECTO \
                         or data[key] < MIN_ENDO_MESO_ECTO:
                             errors.append(
-                                f'{key}: {data[key]} must be an integer in range from {MIN_ENDO_MESO_ECTO} to {MAX_ENDO_MESO_ECTO}'
+                                f'{key}: {data[key]} must be an number in range from {MIN_ENDO_MESO_ECTO} to {MAX_ENDO_MESO_ECTO}'
                             )
                 case 'meso':
-                    if not isinstance(data[key], int) \
+                    if not isinstance(data[key], float) \
                         or data[key] > MAX_ENDO_MESO_ECTO\
                         or data[key] < MIN_ENDO_MESO_ECTO:
                             errors.append(
-                                f'{key}: {data[key]} must be an integer in range from {MIN_ENDO_MESO_ECTO} to {MAX_ENDO_MESO_ECTO}'
+                                f'{key}: {data[key]} must be an number in range from {MIN_ENDO_MESO_ECTO} to {MAX_ENDO_MESO_ECTO}'
                             )
                 case 'ecto':
-                    if not isinstance(data[key], int) \
+                    if not isinstance(data[key], float) \
                         or data[key] > MAX_ENDO_MESO_ECTO \
                         or data[key] < MIN_ENDO_MESO_ECTO:
                             errors.append(
-                                f'{key}: {data[key]} must be an integer in range from {MIN_ENDO_MESO_ECTO} to {MAX_ENDO_MESO_ECTO}'
+                                f'{key}: {data[key]} must be an number in range from {MIN_ENDO_MESO_ECTO} to {MAX_ENDO_MESO_ECTO}'
                             )
                 case 'color':
                     if not isinstance(data[key], str) \
