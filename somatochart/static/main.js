@@ -102,26 +102,27 @@ function loadData() {
       });
 
       const list = document.getElementById("list");
-      list.innerHTML = "";
+      list.innerHTML = athletes.length == 0 ? "" : tableHeader();
       athletes.forEach((a) => {
         const li = document.createElement("li");
-        li.textContent = `${a.name} endo:${a.endo} meso:${a.meso} ecto:${a.ecto} ${a.color} ${a.symbol} ${a.isVisible}`;
+        li.textContent = tableRow(a);
 
-        // const updateBtn = document.createElement("button");
-        // updateBtn.textContent = "Update";
-        // updateBtn.addEventListener("click", () => {
-        //   console.log(`updated ${a._id}`);
-        // });
+        // TODO: update
+        const updateBtn = document.createElement("button");
+        updateBtn.textContent = "Edit";
+        updateBtn.addEventListener("click", () => {
+          console.log(`updated ${a._id}`);
+        });
 
         const deleteBtn = document.createElement("button");
-        deleteBtn.textContent = "Delete";
+        deleteBtn.textContent = "Del";
         deleteBtn.addEventListener("click", () => {
           fetch(`/athletes/${a._id}`, { method: "DELETE" })
             .then((res) => res.json())
             .then(() => loadData());
         });
 
-        // li.appendChild(updateBtn);
+        li.appendChild(updateBtn);
         li.appendChild(deleteBtn);
         list.appendChild(li);
       });
@@ -133,6 +134,67 @@ function loadData() {
         });
       });
     });
+}
+
+const DECIMAL_PRECISION = 2;
+const MAX_NAME_COL_LEN = 20;
+const MAX_MARKER_COL_LEN = 14;
+const MAX_VISIBILITY_COL_LEN = 6;
+const COL_SEPARATOR = " | ";
+
+function tableHeader() {
+  const NAME_COL_HEADER = "NAME";
+  const ENDO_COL_HEADER = "ENDO";
+  const MESO_COL_HEADER = "MESO";
+  const ECTO_COL_HEADER = "ECTO";
+  const MARKER_COL_HEADER = "MARKER";
+  const VISIBILITY_COL_HEADER = "SHOW";
+
+  return `${
+    NAME_COL_HEADER +
+    tableEvenSpaces(MAX_NAME_COL_LEN, NAME_COL_HEADER.length) +
+    COL_SEPARATOR +
+    ENDO_COL_HEADER +
+    COL_SEPARATOR +
+    MESO_COL_HEADER +
+    COL_SEPARATOR +
+    ECTO_COL_HEADER +
+    COL_SEPARATOR +
+    MARKER_COL_HEADER +
+    tableEvenSpaces(MAX_MARKER_COL_LEN, MARKER_COL_HEADER.length) +
+    COL_SEPARATOR +
+    VISIBILITY_COL_HEADER
+  }`;
+}
+
+function tableRow(athlete) {
+  const name = athlete.name;
+  const endo = athlete.endo.toFixed(DECIMAL_PRECISION);
+  const meso = athlete.meso.toFixed(DECIMAL_PRECISION);
+  const ecto = athlete.ecto.toFixed(DECIMAL_PRECISION);
+  const marker = athlete.color.concat(" ", athlete.symbol);
+  const visibility = athlete.isVisible.toString();
+
+  return `${
+    name +
+    tableEvenSpaces(MAX_NAME_COL_LEN, name.length) +
+    COL_SEPARATOR +
+    endo +
+    COL_SEPARATOR +
+    meso +
+    COL_SEPARATOR +
+    ecto +
+    COL_SEPARATOR +
+    marker +
+    tableEvenSpaces(MAX_MARKER_COL_LEN, marker.length) +
+    COL_SEPARATOR +
+    visibility +
+    tableEvenSpaces(MAX_VISIBILITY_COL_LEN, visibility.length)
+  }`;
+}
+
+function tableEvenSpaces(maxColLen, valueLen) {
+  return " ".repeat(maxColLen - valueLen);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -165,37 +227,6 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((res) => res.json())
       .then(() => loadData());
   });
-
-  // document
-  //   .getElementById("updateForm")
-  //   .addEventListener("submit", function (e) {
-  //     e.preventDefault();
-  //     const id = e.target.id.value;
-  //     const name = e.target.name.value;
-  //     const endo = e.target.endo.value;
-  //     const meso = e.target.meso.value;
-  //     const ecto = e.target.ecto.value;
-  //     const color = e.target.color.value;
-  //     const symbol = e.target.symbol.value;
-  //     const isVisible = (e.target.isVisible.value === "true");
-  //     e.target.reset();
-
-  //     fetch(`/athletes/${id}`, {
-  //       method: "PUT",
-  //       headers: { "Content-Type": "application/json; charset=utf-8" },
-  //       body: JSON.stringify({
-  //         name,
-  //         endo: Number(endo),
-  //         meso: Number(meso),
-  //         ecto: Number(ecto),
-  //         color,
-  //         symbol,
-  //         isVisible,
-  //       }),
-  //     })
-  //       .then((res) => res.json())
-  //       .then(() => loadChartAndList());
-  //   });
 
   document.getElementById("clearBtn").addEventListener("click", () => {
     fetch("/athletes", {
