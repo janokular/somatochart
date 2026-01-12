@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Script used for importing .csv data for SomatoChart
-# .csv file must end with an empty line otherwise last entry will be skipped
 
 # Make sure user provided all needed arguments
 number_of_params="${#}"
@@ -21,6 +20,7 @@ fi
 
 name=$(basename $csv_file .csv)
 
+# TODO: .csv file must end with an empty line otherwise last entry will be skipped
 while IFS=',' read -r endo meso ecto; do
   curl -X POST http://localhost:8080/athletes \
      -H "Content-Type: application/json" \
