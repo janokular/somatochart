@@ -7,8 +7,6 @@ csv_file=$1
 name=$(basename $csv_file .csv)
 color=$2
 
-echo $name
-
 # Make sure the file was supplied as an argument
 if [[ ! -e "${csv_file}" ]]; then
   echo "Cannot open .csv file ${csv_file}" >&2
