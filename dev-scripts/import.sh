@@ -12,7 +12,7 @@ fi
 csv_file=$1
 color=$2
 
-# Make sure the file exists
+# Make sure the .csv file exists
 if [[ ! -e "${csv_file}" ]]; then
   echo "Cannot open .csv file ${csv_file}" >&2
   exit 1
