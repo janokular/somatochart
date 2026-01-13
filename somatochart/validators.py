@@ -30,7 +30,7 @@ def validate_user_request(data):
                             )
                 case 'meso':
                     if not isinstance(data[key], (int, float)) \
-                        or data[key] > MAX_ENDO_MESO_ECTO\
+                        or data[key] > MAX_ENDO_MESO_ECTO \
                         or data[key] < MIN_ENDO_MESO_ECTO:
                             errors.append(
                                 f'{key}: {data[key]} must be an number in range from {MIN_ENDO_MESO_ECTO} to {MAX_ENDO_MESO_ECTO}'
