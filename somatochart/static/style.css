@@ -45,6 +45,10 @@ body {
   white-space: pre;
 }
 
+#list li {
+  margin-bottom: 5px;
+}
+
 #list button {
   font-family: monospace;
   margin-left: 10px;

@@ -150,7 +150,7 @@ function tableHeader() {
   const MARKER_COL_HEADER = "MARKER";
   const VISIBILITY_COL_HEADER = "SHOW";
 
-  return `${
+  return `<li>${
     NAME_COL_HEADER +
     tableEvenSpaces(MAX_NAME_COL_LEN, NAME_COL_HEADER.length) +
     COL_SEPARATOR +
@@ -164,7 +164,7 @@ function tableHeader() {
     tableEvenSpaces(MAX_MARKER_COL_LEN, MARKER_COL_HEADER.length) +
     COL_SEPARATOR +
     VISIBILITY_COL_HEADER
-  }`;
+  }</li>`;
 }
 
 function tableRow(athlete) {
