@@ -18,10 +18,11 @@ if [[ ! -e "${csv_file}" ]]; then
   exit 1
 fi
 
-name=$(basename $csv_file .csv)
+# Name max length is 20
+name=$(basename $csv_file .csv | cut -c 1-20)
 
 # TODO: .csv file must end with an empty line otherwise last entry will be skipped
-while IFS=',' read -r endo meso ecto; do
+while IFS="," read -r endo meso ecto; do
   curl -X POST http://localhost:8080/athletes \
      -H "Content-Type: application/json" \
      -d "{\"endo\": $endo, \"meso\": $meso, \"ecto\": $ecto, \"name\": \"$name\", \"color\": \"$color\", \"symbol\": \"circle\", \"isVisible\": true}"
