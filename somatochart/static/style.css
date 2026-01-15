@@ -1,4 +1,6 @@
 body {
+  width: 750px;
+  margin: auto;
   font-family: monospace;
   font-size: 1rem;
 }
@@ -7,22 +9,12 @@ button, input, select {
   font-family: monospace;
 }
 
-#chart {
-  margin: auto;
-  width: 750px;
-  height: 750px;
-}
-
 #controlPanel {
-  margin: auto;
-  width: 750px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 #addForm {
-  margin: auto;
-  width: 750px;
-  margin-bottom: 15px;
+  margin-top: 5px;
   display: flex;
   justify-content: space-between;
 }
@@ -32,8 +24,6 @@ button, input, select {
 }
 
 #list {
-  margin: auto;
-  width: 750px;
   list-style: none;
   padding-left: 0;
   white-space: pre;
