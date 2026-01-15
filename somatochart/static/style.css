@@ -3,6 +3,10 @@ body {
   font-size: 1rem;
 }
 
+button, input, select {
+  font-family: monospace;
+}
+
 #chart {
   margin: auto;
   width: 750px;
@@ -12,44 +16,32 @@ body {
 #controlPanel {
   margin: auto;
   width: 750px;
-}
-
-#controlPanel button {
-  font-family: monospace;
+  margin-bottom: 5px;
 }
 
 #addForm {
   margin: auto;
   width: 750px;
-  margin-top: 5px;
-}
-
-#addForm input {
-  font-family: monospace;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
 }
 
 #addForm select {
-  font-family: monospace;
-}
-
-#addForm button {
-  font-family: monospace;
+  height: 21px;
 }
 
 #list {
   margin: auto;
   width: 750px;
-  margin-top: 15px;
   list-style: none;
   padding-left: 0;
   white-space: pre;
 }
 
 #list li {
+  height: 21px;
   margin-bottom: 5px;
-}
-
-#list button {
-  font-family: monospace;
-  margin-left: 10px;
+  display: flex;
+  justify-content: space-between;
 }
