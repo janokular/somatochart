@@ -1,4 +1,4 @@
-function loadData() {
+function loadChartAndListData() {
   fetch("/athletes")
     .then((res) => res.json())
     .then((athletes) => {
@@ -102,30 +102,36 @@ function loadData() {
       });
 
       const list = document.getElementById("list");
-      list.innerHTML = athletes.length == 0 ? "" : tableHeader();
-      athletes.forEach((a) => {
-        const li = document.createElement("li");
-        li.textContent = tableRow(a);
+      list.innerHTML = ""
+      if (athletes.length != 0) {
+        const listHeader = document.createElement("li")
+        listHeader.textContent = createListHeader();
+        list.appendChild(listHeader)
 
-        // TODO: update
-        const updateBtn = document.createElement("button");
-        updateBtn.textContent = "Edit";
-        updateBtn.addEventListener("click", () => {
-          console.log(`updated ${a._id}`);
+        athletes.forEach((a) => {
+          const listRow = document.createElement("li");
+          listRow.textContent = createListRow(a);
+
+          // TODO: update
+          const updateBtn = document.createElement("button");
+          updateBtn.textContent = "Edit";
+          updateBtn.addEventListener("click", () => {
+            console.log(`updated ${a._id}`);
+          });
+
+          const deleteBtn = document.createElement("button");
+          deleteBtn.textContent = "Del";
+          deleteBtn.addEventListener("click", () => {
+            fetch(`/athletes/${a._id}`, { method: "DELETE" })
+              .then((res) => res.json())
+              .then(() => loadChartAndListData());
+          });
+
+          listRow.appendChild(updateBtn);
+          listRow.appendChild(deleteBtn);
+          list.appendChild(listRow);
         });
-
-        const deleteBtn = document.createElement("button");
-        deleteBtn.textContent = "Del";
-        deleteBtn.addEventListener("click", () => {
-          fetch(`/athletes/${a._id}`, { method: "DELETE" })
-            .then((res) => res.json())
-            .then(() => loadData());
-        });
-
-        li.appendChild(updateBtn);
-        li.appendChild(deleteBtn);
-        list.appendChild(li);
-      });
+      }
 
       document.getElementById("downloadBtn").addEventListener("click", () => {
         chart.exportChart({
@@ -142,17 +148,16 @@ const MAX_MARKER_COL_LEN = 14;
 const MAX_VISIBILITY_COL_LEN = 6;
 const COL_SEPARATOR = " | ";
 
-function tableHeader() {
+function createListHeader() {
   const NAME_COL_HEADER = "NAME";
   const ENDO_COL_HEADER = "ENDO";
   const MESO_COL_HEADER = "MESO";
   const ECTO_COL_HEADER = "ECTO";
   const MARKER_COL_HEADER = "MARKER";
-  const VISIBILITY_COL_HEADER = "SHOW";
+  const VISIBILITY_COL_HEADER = "VISIBLE";
 
-  return `<li>${
-    NAME_COL_HEADER +
-    tableEvenSpaces(MAX_NAME_COL_LEN, NAME_COL_HEADER.length) +
+  return `${NAME_COL_HEADER +
+    evenSpaces(MAX_NAME_COL_LEN, NAME_COL_HEADER.length) +
     COL_SEPARATOR +
     ENDO_COL_HEADER +
     COL_SEPARATOR +
@@ -161,13 +166,13 @@ function tableHeader() {
     ECTO_COL_HEADER +
     COL_SEPARATOR +
     MARKER_COL_HEADER +
-    tableEvenSpaces(MAX_MARKER_COL_LEN, MARKER_COL_HEADER.length) +
+    evenSpaces(MAX_MARKER_COL_LEN, MARKER_COL_HEADER.length) +
     COL_SEPARATOR +
     VISIBILITY_COL_HEADER
-  }</li>`;
+    }`;
 }
 
-function tableRow(athlete) {
+function createListRow(athlete) {
   const name = athlete.name;
   const endo = athlete.endo.toFixed(DECIMAL_PRECISION);
   const meso = athlete.meso.toFixed(DECIMAL_PRECISION);
@@ -175,9 +180,8 @@ function tableRow(athlete) {
   const marker = athlete.color.concat(" ", athlete.symbol);
   const visibility = athlete.isVisible.toString();
 
-  return `${
-    name +
-    tableEvenSpaces(MAX_NAME_COL_LEN, name.length) +
+  return `${name +
+    evenSpaces(MAX_NAME_COL_LEN, name.length) +
     COL_SEPARATOR +
     endo +
     COL_SEPARATOR +
@@ -186,19 +190,19 @@ function tableRow(athlete) {
     ecto +
     COL_SEPARATOR +
     marker +
-    tableEvenSpaces(MAX_MARKER_COL_LEN, marker.length) +
+    evenSpaces(MAX_MARKER_COL_LEN, marker.length) +
     COL_SEPARATOR +
     visibility +
-    tableEvenSpaces(MAX_VISIBILITY_COL_LEN, visibility.length)
-  }`;
+    evenSpaces(MAX_VISIBILITY_COL_LEN, visibility.length)
+    }`;
 }
 
-function tableEvenSpaces(maxColLen, valueLen) {
+function evenSpaces(maxColLen, valueLen) {
   return " ".repeat(maxColLen - valueLen);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  loadData();
+  loadChartAndListData();
 
   document.getElementById("addForm").addEventListener("submit", function (e) {
     e.preventDefault();
@@ -225,7 +229,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }),
     })
       .then((res) => res.json())
-      .then(() => loadData());
+      .then(() => loadChartAndListData());
   });
 
   document.getElementById("clearBtn").addEventListener("click", () => {
@@ -233,6 +237,6 @@ document.addEventListener("DOMContentLoaded", function () {
       method: "DELETE",
     })
       .then((res) => res.json())
-      .then(() => loadData());
+      .then(() => loadChartAndListData());
   });
 });
