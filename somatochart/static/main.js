@@ -120,7 +120,7 @@ function loadChartAndListData() {
           });
 
           const deleteBtn = document.createElement("button");
-          deleteBtn.textContent = "Delete";
+          deleteBtn.textContent = "Del";
           deleteBtn.addEventListener("click", () => {
             fetch(`/athletes/${a._id}`, { method: "DELETE" })
               .then((res) => res.json())
