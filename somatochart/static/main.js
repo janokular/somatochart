@@ -102,11 +102,11 @@ function loadChartAndListData() {
       });
 
       const list = document.getElementById("list");
-      list.innerHTML = ""
+      list.innerHTML = "";
       if (athletes.length != 0) {
-        const listHeader = document.createElement("li")
+        const listHeader = document.createElement("li");
         listHeader.textContent = createListHeader();
-        list.appendChild(listHeader)
+        list.appendChild(listHeader);
 
         athletes.forEach((a) => {
           const listRow = document.createElement("li");
@@ -156,7 +156,8 @@ function createListHeader() {
   const MARKER_COL_HEADER = "MARKER";
   const VISIBILITY_COL_HEADER = "VISIBLE";
 
-  return `${NAME_COL_HEADER +
+  return `${
+    NAME_COL_HEADER +
     evenSpaces(MAX_NAME_COL_LEN, NAME_COL_HEADER.length) +
     COL_SEPARATOR +
     ENDO_COL_HEADER +
@@ -169,7 +170,7 @@ function createListHeader() {
     evenSpaces(MAX_MARKER_COL_LEN, MARKER_COL_HEADER.length) +
     COL_SEPARATOR +
     VISIBILITY_COL_HEADER
-    }`;
+  }`;
 }
 
 function createListRow(athlete) {
@@ -180,7 +181,8 @@ function createListRow(athlete) {
   const marker = athlete.color.concat(" ", athlete.symbol);
   const visibility = athlete.isVisible.toString();
 
-  return `${name +
+  return `${
+    name +
     evenSpaces(MAX_NAME_COL_LEN, name.length) +
     COL_SEPARATOR +
     endo +
@@ -194,7 +196,7 @@ function createListRow(athlete) {
     COL_SEPARATOR +
     visibility +
     evenSpaces(MAX_VISIBILITY_COL_LEN, visibility.length)
-    }`;
+  }`;
 }
 
 function evenSpaces(maxColLen, valueLen) {
