@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -21,66 +21,8 @@
   </head>
   <body>
     <div id="chart"></div>
-
-    <div id="controlPanel">
-      <button id="downloadBtn">Download</button>
-      <button id="clearBtn">Clear</button>
-      <form id="addForm">
-        <input
-          type="text"
-          name="name"
-          maxlength="20"
-          placeholder="NAME"
-          autocomplete="off"
-          required
-        />
-        <input
-          type="number"
-          name="endo"
-          min="0"
-          max="8"
-          step="0.01"
-          placeholder="ENDO"
-          required
-        />
-        <input
-          type="number"
-          name="meso"
-          min="0"
-          max="8"
-          step="0.01"
-          placeholder="MESO"
-          required
-        />
-        <input
-          type="number"
-          name="ecto"
-          min="0"
-          max="8"
-          step="0.01"
-          placeholder="ECTO"
-          required
-        />
-        <select title="Choose point color" name="color">
-          <option type="text" value="blue">BLUE</option>
-          <option type="text" value="green">GREEN</option>
-          <option type="text" value="red">RED</option>
-        </select>
-        <select title="Choose point symbol" name="symbol">
-          <option type="text" value="circle">CIRCLE</option>
-          <option type="text" value="square">SQUARE</option>
-          <option type="text" value="triangle">TRIANGLE</option>
-        </select>
-        <select title="Choose point visibility" name="isVisible">
-          <option type="text" value="true">VISIBLE</option>
-          <option type="text" value="false">NON-VISIBLE</option>
-        </select>
-        <button type="submit">+ Add</button>
-      </form>
-    </div>
-
-    <ul id="list"></ul>
-
+    <button id="downloadBtn">Download</button>
+    <button id="clearBtn">Clear</button>
     <script src="{{ url_for('static', filename='main.js') }}"></script>
   </body>
 </html>
