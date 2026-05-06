@@ -109,6 +109,21 @@ function loadChartData() {
 document.addEventListener("DOMContentLoaded", function () {
   loadChartData();
 
+  document.getElementById("importBtn").addEventListener("click", () => {
+    const fileInput = document.getElementById("csvFile");
+    const file = fileInput.files[0];
+    
+    const formData = new FormData();
+    formData.append("file", file);
+
+    fetch("/import", {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.text())
+      .then(() => loadChartData());
+  });
+
   document.getElementById("clearBtn").addEventListener("click", () => {
     fetch("/athletes", {
       method: "DELETE",

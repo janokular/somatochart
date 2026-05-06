@@ -21,6 +21,8 @@
   </head>
   <body>
     <div id="chart"></div>
+    <input id="csvFile" type="file" accept=".csv" />
+    <button id="importBtn">Import</button>
     <button id="downloadBtn">Download</button>
     <button id="clearBtn">Clear</button>
     <script src="{{ url_for('static', filename='main.js') }}"></script>

@@ -2,18 +2,18 @@ from flask import Blueprint
 from flask import request
 from flask import render_template
 from flask import jsonify
-from bson.objectid import ObjectId
 
 from .db import mongo
 from .models import Athlete
-from .validators import validate_user_request
+from .validators import athlete_validator
+from .csv_handlers import file_reader
 
 
 main = Blueprint('routes', __name__)
 
 
 @main.route('/')
-def index_page():
+def index():
     return render_template('index.html')
 
 
@@ -28,60 +28,26 @@ def get_athletes():
         return jsonify({'error': str(e)}), 500
 
 
-@main.route('/athletes/<id>', methods=['GET'])
-def get_athlete(id):
-    try:
-        athlete = mongo.db.athletes.find_one({'_id': ObjectId(id)})
-        if athlete:
-            athlete['_id'] = str(athlete['_id'])
-            return jsonify(athlete), 200
-        return jsonify({'error': 'Athlete not found'}), 404
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-
 @main.route('/athletes', methods=['POST'])
 def add_athlete():
     try:
         data = request.get_json()
-        errors = validate_user_request(data)
+        errors = athlete_validator(data)
         if errors:
             return jsonify({'errors': errors}), 400
-
-        athlete = Athlete(data['name'],
-                          data['endo'],
-                          data['meso'],
-                          data['ecto'],
-                          data['color'],
-                          data['symbol'],
-                          data['isVisible'])
+        
+        athlete = Athlete(
+            data['name'],
+            data['endo'],
+            data['meso'],
+            data['ecto'],
+            data['color'],
+            data['symbol'],
+            data['isVisible']
+        )
         
         mongo.db.athletes.insert_one(athlete.to_dict())
         return jsonify({'message': 'Athlete added successfully'}), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-
-@main.route('/athletes/<id>', methods=['PUT'])
-def update_athlete(id):
-    try:
-        data = request.get_json()
-        errors = validate_user_request(data)
-        if errors:
-            return jsonify({'errors': errors}), 400
-
-        athlete = Athlete(data['name'],
-                          data['endo'],
-                          data['meso'],
-                          data['ecto'],
-                          data['color'],
-                          data['symbol'],
-                          data['isVisible'])
-
-        result = mongo.db.athletes.update_one({'_id': ObjectId(id)}, {'$set': athlete.to_dict()})
-        if result.modified_count > 0:
-            return jsonify({'message': 'Athlete updated successfully'}), 200
-        return jsonify({'error': 'No changes identical data'}), 300
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -92,18 +58,39 @@ def delete_athletes():
         if mongo.db.athletes.count_documents({}) > 0:
             result = mongo.db.athletes.delete_many({})
             if result.deleted_count > 0:
-                return jsonify({'message': 'Database cleared succesfully'}), 200
+                return jsonify({'message': 'Database cleared successfully'}), 200
         return jsonify({'message': 'Database is already cleared'}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 
-@main.route('/athletes/<id>', methods=['DELETE'])
-def delete_athlete(id):
+@main.route('/import', methods=['POST'])
+def import_csv():
     try:
-        result = mongo.db.athletes.delete_one({'_id': ObjectId(id)})
-        if result.deleted_count > 0:
-            return jsonify({'message': 'Athlete deleted successfully'}), 200
-        return jsonify({'error': 'Athlete not found'}), 404
+        file = request.files['file']
+        file_data = file_reader(file)
+
+        athletes = []
+        for item in file_data:
+            errors = athlete_validator(item)
+            if errors:
+                return jsonify({'errors': errors}), 400
+        
+            athlete = Athlete(
+                name=item['name'],
+                endo=item['endo'],
+                meso=item['meso'],
+                ecto=item['ecto'],
+                color=item['color'],
+                symbol=item['symbol'],
+                isVisible=item['isVisible']
+            )
+
+            athletes.append(athlete.to_dict())
+
+        if athletes:
+            mongo.db.athletes.insert_many(athletes)
+
+        return jsonify({'message': 'Data imported successfully'}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500

@@ -7,3 +7,8 @@ button {
   font-family: monospace;
   margin-right: 0.5rem;
 }
+
+input,
+input[type="file"]::file-selector-button {
+  font-family: monospace;
+}

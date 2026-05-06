@@ -1,4 +1,4 @@
-def validate_user_request(data):
+def athlete_validator(data):
     REQUIRED_FIELDS = ['name', 'endo', 'meso', 'ecto', 'color', 'symbol', 'isVisible']
     MAX_NAME_LEN = 20
     MAX_ENDO_MESO_ECTO = 8
