@@ -121,7 +121,10 @@ document.addEventListener("DOMContentLoaded", function () {
       body: formData,
     })
       .then((res) => res.text())
-      .then(() => loadChartData());
+      .then(() => loadChartData())
+      .finally(() => {
+        fileInput.value = "";
+      });
   });
 
   document.getElementById("clearBtn").addEventListener("click", () => {
