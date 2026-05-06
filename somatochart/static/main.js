@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("importBtn").addEventListener("click", () => {
     const fileInput = document.getElementById("csvFile");
     const file = fileInput.files[0];
-    
+
     const formData = new FormData();
     formData.append("file", file);
 
