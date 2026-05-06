@@ -31,22 +31,24 @@ def get_athletes():
 @main.route('/athletes', methods=['POST'])
 def add_athlete():
     try:
-        data = request.get_json()
-        errors = athlete_validator(data)
+        athlete_data = request.get_json()
+        errors = athlete_validator(athlete_data)
         if errors:
             return jsonify({'errors': errors}), 400
         
         athlete = Athlete(
-            data['name'],
-            data['endo'],
-            data['meso'],
-            data['ecto'],
-            data['color'],
-            data['symbol'],
-            data['isVisible']
+            name=athlete_data['name'],
+            endo=athlete_data['endo'],
+            meso=athlete_data['meso'],
+            ecto=athlete_data['ecto'],
+            color=athlete_data['color'],
+            symbol=athlete_data['symbol'],
+            isVisible=athlete_data['isVisible']
         )
         
-        mongo.db.athletes.insert_one(athlete.to_dict())
+        if athlete:
+            mongo.db.athletes.insert_one(athlete.to_dict())
+        
         return jsonify({'message': 'Athlete added successfully'}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -71,19 +73,19 @@ def import_csv():
         file_data = file_reader(file)
 
         athletes = []
-        for item in file_data:
-            errors = athlete_validator(item)
+        for athlete_data in file_data:
+            errors = athlete_validator(athlete_data)
             if errors:
                 return jsonify({'errors': errors}), 400
         
             athlete = Athlete(
-                name=item['name'],
-                endo=item['endo'],
-                meso=item['meso'],
-                ecto=item['ecto'],
-                color=item['color'],
-                symbol=item['symbol'],
-                isVisible=item['isVisible']
+                name=athlete_data['name'],
+                endo=athlete_data['endo'],
+                meso=athlete_data['meso'],
+                ecto=athlete_data['ecto'],
+                color=athlete_data['color'],
+                symbol=athlete_data['symbol'],
+                isVisible=athlete_data['isVisible']
             )
 
             athletes.append(athlete.to_dict())

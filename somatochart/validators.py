@@ -1,6 +1,6 @@
 def athlete_validator(data):
     REQUIRED_FIELDS = ['name', 'endo', 'meso', 'ecto', 'color', 'symbol', 'isVisible']
-    MAX_NAME_LEN = 20
+    MAX_NAME_LEN = 50
     MAX_ENDO_MESO_ECTO = 8
     MIN_ENDO_MESO_ECTO = 0
     POINT_COLORS = ['blue', 'red', 'green']
