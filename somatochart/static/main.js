@@ -73,11 +73,7 @@ function loadChartData() {
               enabled: false,
             },
           },
-          chartOptions: {
-            chart: {
-              plotBackgroundImage: "static/assets/chart-background.jpg",
-            },
-          },
+          scale: 5,
         },
         series: [
           {
@@ -103,7 +99,7 @@ function loadChartData() {
 
       document.getElementById("downloadBtn").addEventListener("click", () => {
         chart.exportChart({
-          type: "image/jpg",
+          type: "image/png",
           filename: "somatochart",
         });
       });
