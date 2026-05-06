@@ -5,7 +5,7 @@ from flask import jsonify
 
 from .db import mongo
 from .models import Athlete
-from .validators import athlete_validator
+from .validators import athlete_data_validator
 from .csv_handlers import file_reader
 
 
@@ -32,7 +32,7 @@ def get_athletes():
 def add_athlete():
     try:
         athlete_data = request.get_json()
-        errors = athlete_validator(athlete_data)
+        errors = athlete_data_validator(athlete_data)
         if errors:
             return jsonify({'errors': errors}), 400
         
@@ -74,7 +74,7 @@ def import_csv():
 
         athletes = []
         for athlete_data in file_data:
-            errors = athlete_validator(athlete_data)
+            errors = athlete_data_validator(athlete_data)
             if errors:
                 return jsonify({'errors': errors}), 400
         

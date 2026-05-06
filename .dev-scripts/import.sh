@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Script used for importing .csv data for SomatoChart
-
 # Make sure user provided all needed arguments
 number_of_params="${#}"
 if [[ "${number_of_params}" -ne 1 ]]; then
