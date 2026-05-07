@@ -5,8 +5,7 @@ from flask import jsonify
 
 from .db import mongo
 from .models import Athlete
-from .validators import athlete_data_validator
-from .csv_handlers import parse_csv_file
+from .csv_parser import csv_parser
 
 
 main = Blueprint('routes', __name__)
@@ -44,21 +43,16 @@ def delete_athletes():
 def add_athletes_from_csv():
     try:
         csv_file = request.files['file']
-        file_data = parse_csv_file(csv_file)
+        parsed_data = csv_parser(csv_file) # Validate CSV data
 
         athletes = []
-        for data in file_data:
-            errors = athlete_data_validator(data)
-            if errors:
-                return jsonify({'errors': errors}), 400
-        
-            athlete = Athlete(**data)
-
+        for row in parsed_data:        
+            athlete = Athlete(**row)
             athletes.append(athlete.to_dict())
 
         if athletes:
             mongo.db.athletes.insert_many(athletes)
-
+        
         return jsonify({'message': 'Data imported successfully'}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
