@@ -81,7 +81,6 @@ function loadChartData() {
             animation: false,
             enableMouseTracking: false,
             data: athletes
-              .filter((a) => a.visible)
               .map((a) => ({
                 _id: a._id,
                 x: a.x,
