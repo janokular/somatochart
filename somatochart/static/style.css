@@ -7,5 +7,16 @@ button,
 input,
 input[type="file"]::file-selector-button {
   font-family: monospace;
-  margin-right: 0.5rem;
+  margin-right: 10px;
+}
+
+legend {
+  font-family: monospace;
+  font-weight: bold;
+}
+
+fieldset {
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }

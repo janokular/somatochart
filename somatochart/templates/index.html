@@ -6,7 +6,7 @@
     <link
       rel="icon"
       type="image/svg"
-      href="{{ url_for('static', filename='favicon.svg') }}"
+      href="{{ url_for('static', filename='images/favicon.svg') }}"
     />
     <title>SomatoChart</title>
     <link
@@ -21,10 +21,17 @@
   </head>
   <body>
     <div id="chart"></div>
-    <input id="csvFile" type="file" accept=".csv" />
-    <button id="importBtn">Import</button>
-    <button id="downloadBtn">Download</button>
-    <button id="clearBtn">Clear</button>
+    </fieldset>
+    <fieldset>
+      <legend>Add athletes from CSV file</legend>
+      <input id="csvFile" type="file" accept=".csv" />
+      <button id="importBtn">Import</button>
+    </fieldset>
+    <fieldset>
+      <legend>Chart options</legend>
+      <button id="downloadBtn">Download</button>
+      <button id="clearBtn">Clear</button>
+    </fieldset>
     <script src="{{ url_for('static', filename='main.js') }}"></script>
   </body>
 </html>

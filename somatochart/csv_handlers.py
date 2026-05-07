@@ -30,10 +30,10 @@ def auto_convert(value):
     return value
 
 
-def file_reader(file):
+def csv_reader(csv_file):
     file_data = []
     
-    stream = StringIO(file.stream.read().decode('UTF8'), newline=None)
+    stream = StringIO(csv_file.stream.read().decode('UTF8'), newline=None)
     csv_reader = DictReader(stream)
 
     for row in csv_reader:

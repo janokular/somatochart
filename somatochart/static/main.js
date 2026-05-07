@@ -7,7 +7,7 @@ function loadChartData() {
           type: "scatter",
           width: 750,
           height: 750,
-          plotBackgroundImage: "static/assets/chart-background.svg",
+          plotBackgroundImage: "static/images/background.svg",
           backgroundColor: "#ffffff",
           style: {
             fontFamily: "monospace",
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const formData = new FormData();
     formData.append("file", file);
 
-    fetch("/import", {
+    fetch("/athletes", {
       method: "POST",
       body: formData,
     })

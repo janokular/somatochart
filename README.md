@@ -13,10 +13,9 @@ flask run
 # Get all athletes
 curl -X GET http://localhost:5001/athletes
 
-# Add athlete
+# Add athletes from CSV file
 curl -X POST http://localhost:5001/athletes \
-     -H "Content-Type: application/json" \
-     -d '{"endo": 1, "meso": 2, "ecto": 3, "name": "New Athlete", "color": "blue", "symbol": "circle", "visible": true}'
+     -F "file=@athletes.csv;type=text/csv"
 
 # Delete all athletes
 curl -X DELETE http://localhost:5001/athletes
