@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Make sure user provided all needed arguments
-number_of_params="${#}"
-if [[ "${number_of_params}" -ne 1 ]]; then
+if [[ "${#}" -ne 1 ]]; then
   echo "Usage: ${0} CSV_FILE" >&2
   exit 1
 fi
