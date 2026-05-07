@@ -43,7 +43,7 @@ def add_athlete():
             ecto=athlete_data['ecto'],
             color=athlete_data['color'],
             symbol=athlete_data['symbol'],
-            isVisible=athlete_data['isVisible']
+            visible=athlete_data['visible']
         )
         
         if athlete:
@@ -85,7 +85,7 @@ def import_csv():
                 ecto=athlete_data['ecto'],
                 color=athlete_data['color'],
                 symbol=athlete_data['symbol'],
-                isVisible=athlete_data['isVisible']
+                visible=athlete_data['visible']
             )
 
             athletes.append(athlete.to_dict())

@@ -1,5 +1,5 @@
 def athlete_data_validator(data):
-    REQUIRED_FIELDS = ['name', 'endo', 'meso', 'ecto', 'color', 'symbol', 'isVisible']
+    REQUIRED_FIELDS = ['name', 'endo', 'meso', 'ecto', 'color', 'symbol', 'visible']
     MAX_NAME_LEN = 50
     MAX_ENDO_MESO_ECTO = 8
     MIN_ENDO_MESO_ECTO = 0
@@ -54,7 +54,7 @@ def athlete_data_validator(data):
                             errors.append(
                                 f'{key}: {data[key]} must be a string of following values {POINT_SYMBOLS}'
                             )
-                case 'isVisible':
+                case 'visible':
                     if not isinstance(data[key], bool):
                         errors.append(f'{key}: {data[key]} must be a boolean')
                 case _:

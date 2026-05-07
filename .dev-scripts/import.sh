@@ -16,8 +16,8 @@ if [[ ! -e "${csv_file}" ]]; then
 fi
 
 # TODO: .csv file must end with an empty line otherwise last entry will be skipped
-while IFS="," read -r endo meso ecto name color symbol isVisible; do
+while IFS="," read -r endo meso ecto name color symbol visible; do
   curl -X POST http://localhost:5001/athletes \
      -H "Content-Type: application/json" \
-     -d "{\"endo\": $endo, \"meso\": $meso, \"ecto\": $ecto, \"name\": \"$name\", \"color\": \"$color\", \"symbol\": \"$symbol\", \"isVisible\": $isVisible}"
+     -d "{\"endo\": $endo, \"meso\": $meso, \"ecto\": $ecto, \"name\": \"$name\", \"color\": \"$color\", \"symbol\": \"$symbol\", \"visible\": $visible}"
 done < <(tail -n +2 "${csv_file}")
