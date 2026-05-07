@@ -1,19 +1,15 @@
+from dataclasses import dataclass
+
+
+@dataclass
 class Athlete:
-    def __init__(self,
-                 name: str,
-                 endo: float,
-                 meso: float,
-                 ecto: float,
-                 color: str,
-                 symbol: str,
-                 visible: bool):
-        self.name = name
-        self.endo = endo
-        self.meso = meso
-        self.ecto = ecto
-        self.color = color
-        self.symbol = symbol
-        self.visible = visible
+    name: str
+    endo: float
+    meso: float
+    ecto: float
+    color: str
+    symbol: str
+    visible: bool
 
     @property
     def x(self):

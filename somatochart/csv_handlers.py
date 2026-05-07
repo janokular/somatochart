@@ -1,43 +1,27 @@
 from csv import DictReader
-from io import StringIO
+from io import TextIOWrapper
+from typing import get_type_hints
+
+from .models import Athlete
 
 
-def auto_convert(value):
-    value = value.strip()
-
-    if value == "":
-        return None
-
-    # Boolean
-    if value.lower() == 'true':
-        return True
-    if value.lower() == 'false':
-        return False
-
-    # Integer
-    try:
-        return int(value)
-    except ValueError:
-        pass
-
-    # Float
-    try:
-        return float(value)
-    except ValueError:
-        pass
-
-    # Default: string
-    return value
-
-
-def csv_reader(csv_file):
+def parse_csv_file(csv_file):
     file_data = []
     
-    stream = StringIO(csv_file.stream.read().decode('UTF8'), newline=None)
-    csv_reader = DictReader(stream)
+    stream = TextIOWrapper(
+        csv_file.stream,
+        encoding='utf-8',
+        newline=''
+    )
 
-    for row in csv_reader:
-        converted_row = {key: auto_convert(value) for key, value in row.items()}
-        file_data.append(converted_row)
+    reader = DictReader(stream)
+
+    for row in reader:
+        parsed_row = {}
+        for key, value in row.items():
+            expected_type = get_type_hints(Athlete).get(key)
+            parsed_row[key] = expected_type(value)
+        
+        file_data.append(parsed_row)
 
     return file_data
