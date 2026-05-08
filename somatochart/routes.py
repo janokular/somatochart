@@ -4,7 +4,6 @@ from flask import render_template
 from flask import jsonify
 
 from .db import mongo
-from .models import Athlete
 from .csv_parser import csv_parser
 
 
@@ -43,16 +42,9 @@ def delete_athletes():
 def add_athletes_from_csv():
     try:
         csv_file = request.files['file']
-        parsed_data = csv_parser(csv_file) # Validate CSV data
-
-        athletes = []
-        for row in parsed_data:        
-            athlete = Athlete(**row)
-            athletes.append(athlete.to_dict())
-
+        athletes = csv_parser(csv_file)
         if athletes:
             mongo.db.athletes.insert_many(athletes)
-        
-        return jsonify({'message': 'Data imported successfully'}), 200
+            return jsonify({'message': 'Data imported successfully'}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
