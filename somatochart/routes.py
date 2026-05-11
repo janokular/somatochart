@@ -18,9 +18,9 @@ def index():
 @main.route('/athletes', methods=['GET'])
 def get_athletes():
     try:
-        athletes = list(mongo.db.athletes.find({}))
-        for a in athletes:
-            a['_id'] = str(a['_id'])
+        athletes = list(
+            mongo.db.athletes.find({}, {'_id': 0})
+        )
         return jsonify(athletes), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -29,11 +29,13 @@ def get_athletes():
 @main.route('/athletes', methods=['DELETE'])
 def delete_athletes():
     try:
-        if mongo.db.athletes.count_documents({}) > 0:
-            result = mongo.db.athletes.delete_many({})
-            if result.deleted_count > 0:
-                return jsonify({'message': 'Database cleared successfully'}), 200
-        return jsonify({'message': 'Database is already cleared'}), 200
+        if mongo.db.athletes.count_documents({}) == 0:
+            return jsonify({'message': 'Database is already cleared'}), 200
+        
+        result = mongo.db.athletes.delete_many({})
+
+        if result.deleted_count > 0:
+            return jsonify({'message': 'Database cleared successfully'}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -43,6 +45,7 @@ def add_athletes_from_csv():
     try:
         csv_file = request.files['file']
         athletes = csv_parser(csv_file)
+
         if athletes:
             mongo.db.athletes.insert_many(athletes)
             return jsonify({'message': 'Data imported successfully'}), 200

@@ -1,6 +1,6 @@
 function loadChartData() {
   fetch("/athletes")
-    .then((res) => res.json())
+    .then((response) => response.json())
     .then((athletes) => {
       const chart = Highcharts.chart("chart", {
         chart: {
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
       method: "POST",
       body: formData,
     })
-      .then((res) => res.text())
+      .then((response) => response.text())
       .then(() => loadChartData())
       .finally(() => {
         fileInput.value = "";
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch("/athletes", {
       method: "DELETE",
     })
-      .then((res) => res.json())
+      .then((response) => response.json())
       .then(() => loadChartData());
   });
 });
