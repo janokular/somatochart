@@ -96,7 +96,7 @@ function loadChartData() {
         ],
       });
 
-      document.getElementById("downloadBtn").addEventListener("click", () => {
+      document.getElementById("exportBtn").addEventListener("click", () => {
         chart.exportChart({
           type: "image/png",
           filename: "somatochart",
@@ -108,9 +108,16 @@ function loadChartData() {
 document.addEventListener("DOMContentLoaded", function () {
   loadChartData();
 
-  document.getElementById("importBtn").addEventListener("click", () => {
-    const fileInput = document.getElementById("csvFile");
-    const file = fileInput.files[0];
+  const fileInput = document.getElementById("csvFile");
+  const importBtn = document.getElementById("importBtn");
+  const clearBtn = document.getElementById("clearBtn");
+
+  importBtn.addEventListener("click", () => {
+    fileInput.click();
+  });
+
+  fileInput.addEventListener("change", () => {
+    const file = event.target.files[0];
 
     const formData = new FormData();
     formData.append("file", file);
@@ -126,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 
-  document.getElementById("clearBtn").addEventListener("click", () => {
+  clearBtn.addEventListener("click", () => {
     fetch("/athletes", {
       method: "DELETE",
     })

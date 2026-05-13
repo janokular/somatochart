@@ -15,10 +15,9 @@ fieldset {
 }
 
 input {
-  font-family: monospace;
+   display: none;
 }
 
-input[type="file"]::file-selector-button,
 button {
   font-family: monospace;
   margin-right: 10px;
@@ -30,12 +29,10 @@ button {
   cursor: pointer;
 }
 
-input[type="file"]::file-selector-button:hover,
 button:hover {
   background-color: #d7d7db;
 }
 
-input[type="file"]::file-selector-button:active,
 button:active {
   background-color: #d7d7db;
 }

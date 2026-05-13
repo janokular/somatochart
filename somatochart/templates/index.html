@@ -21,7 +21,6 @@
   </head>
   <body>
     <div id="chart"></div>
-    </fieldset>
     <fieldset>
       <legend>Add athletes from CSV file</legend>
       <input id="csvFile" type="file" accept=".csv" />
@@ -29,7 +28,7 @@
     </fieldset>
     <fieldset>
       <legend>Chart options</legend>
-      <button id="downloadBtn">Download</button>
+      <button id="exportBtn">Export</button>
       <button id="clearBtn">Clear</button>
     </fieldset>
     <script src="{{ url_for('static', filename='main.js') }}"></script>
