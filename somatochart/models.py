@@ -43,25 +43,25 @@ class Athlete:
 
         if MIN_ENDO_MESO_ECTO < self.endo > MAX_ENDO_MESO_ECTO:
             raise Exception(
-                f'Endo must be in range from {MIN_ENDO_MESO_ECTO} to {MAX_ENDO_MESO_ECTO}, current value {self.endo}'
+                f'Incorrect endo value, it must be in range from {MIN_ENDO_MESO_ECTO} to {MAX_ENDO_MESO_ECTO}, current value: {self.endo}'
             )
         
         if MIN_ENDO_MESO_ECTO < self.meso > MAX_ENDO_MESO_ECTO:
             raise Exception(
-                f'Meso must be in range from {MIN_ENDO_MESO_ECTO} to {MAX_ENDO_MESO_ECTO}, current value {self.meso}'
+                f'Incorrect meso value, it must be in range from {MIN_ENDO_MESO_ECTO} to {MAX_ENDO_MESO_ECTO}, current value: {self.meso}'
             )
         
         if MIN_ENDO_MESO_ECTO < self.ecto > MAX_ENDO_MESO_ECTO:
             raise Exception(
-                f'Ecto must be in range from {MIN_ENDO_MESO_ECTO} to {MAX_ENDO_MESO_ECTO}, current value {self.ecto}'
+                f'Incorect ecto value, it must be in range from {MIN_ENDO_MESO_ECTO} to {MAX_ENDO_MESO_ECTO}, current value: {self.ecto}'
             )
         
         if self.color not in SUPPORTED_COLORS:
             raise Exception(
-                f"Color '{self.color}' is unsupported, choose from {SUPPORTED_COLORS}"
+                f"Unsupported color '{self.color}', choose from '{', '.join(SUPPORTED_COLORS)}'"
             )
         
         if self.symbol not in SUPPORTED_SYMBOLS:
             raise Exception(
-                f"Symbol '{self.symbol}' is unsupported, choose from {SUPPORTED_SYMBOLS}"
+                f"Unsupported symbol '{self.symbol}', choose from '{', '.join(SUPPORTED_SYMBOLS)}'"
             )
