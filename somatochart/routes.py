@@ -28,7 +28,10 @@ def get_athletes():
 
 @main.route('/athletes', methods=['DELETE'])
 def delete_athletes():
-    try:        
+    try:
+        if mongo.db.athletes.count_documents({}) == 0:
+            return jsonify({'message': 'Database is already cleared'}), 200
+            
         result = mongo.db.athletes.delete_many({})
 
         if result.deleted_count > 0:
