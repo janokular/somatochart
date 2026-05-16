@@ -33,8 +33,19 @@ class Athlete:
     def __post_init__(self) -> None:
         MIN_ENDO_MESO_ECTO = 0
         MAX_ENDO_MESO_ECTO = 8
-        SUPPORTED_COLORS = ['blue', 'red', 'green']
-        SUPPORTED_SYMBOLS = ['circle', 'square', 'triangle']
+        SUPPORTED_COLORS = [
+            'red',
+            'orange',
+            'yellow',
+            'green',
+            'blue',
+            'purple'
+        ]
+        SUPPORTED_SYMBOLS = [
+            'circle',
+            'square',
+            'triangle'
+        ]
 
         if not isinstance(self.name, str):
             raise Exception(
