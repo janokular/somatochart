@@ -16,7 +16,7 @@ def csv_parser(csv_file) -> list[dict]:
         csv_file.stream,
         encoding='utf-8',
         newline=''
-    )    
+    )
     reader = DictReader(stream)
 
     expected_type = get_type_hints(Athlete)
