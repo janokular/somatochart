@@ -9,9 +9,6 @@ function loadChartData() {
           height: 750,
           plotBackgroundImage: "static/images/background.svg",
           backgroundColor: "#ffffff",
-          style: {
-            fontFamily: "monospace",
-          },
         },
         title: {
           text: "SomatoChart",
