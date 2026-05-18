@@ -77,7 +77,7 @@ function loadChartData() {
             type: "scatter",
             animation: false,
             tooltip: {
-              headerFormat: "name: <b>{point.name}</b><br/>",
+              headerFormat: "<b>{point.name}</b><br/>",
               pointFormat: "x: <b>{point.x}</b><br/>y: <b> {point.y}</b><br/>",
             },
             data: athletes.map((a) => ({
