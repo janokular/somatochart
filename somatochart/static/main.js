@@ -76,19 +76,21 @@ function loadChartData() {
           {
             type: "scatter",
             animation: false,
-            enableMouseTracking: false,
-            data: athletes
-              .map((a) => ({
-                _id: a._id,
-                x: a.x,
-                y: a.y,
-                name: a.name,
-                marker: {
-                  symbol: a.symbol,
-                  fillColor: a.color,
-                  lineColor: a.color,
-                },
-              })),
+            tooltip: {
+              headerFormat: "name: <b>{point.name}</b><br/>",
+              pointFormat: "x: <b>{point.x}</b><br/>y: <b> {point.y}</b><br/>",
+            },
+            data: athletes.map((a) => ({
+              _id: a._id,
+              x: a.x,
+              y: a.y,
+              name: a.name,
+              marker: {
+                symbol: a.symbol,
+                fillColor: a.color,
+                lineColor: a.color,
+              },
+            })),
           },
         ],
       });
