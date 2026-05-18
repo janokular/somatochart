@@ -3,7 +3,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "somatochart" do |somatochart|
     somatochart.vm.hostname = "somatochart"
-    somatochart.vm.network "forwarded_port", guest: 5000, host: 5001
+    somatochart.vm.network "forwarded_port", guest: 5001, host: 5001
 
     somatochart.vm.provision "shell", inline: <<-SHELL
       # Install curl, gnupg and python virtual environment
