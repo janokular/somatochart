@@ -8,7 +8,7 @@ from .models import Athlete
 def csv_parser(csv_file) -> list[dict]:
     '''
     Read CSV file, parse data to expected type based on Athlete schema
-    and return list of dictionaires with Athletes data
+    and return list of dictionaries with Athletes data
     '''
     athletes = []
     
@@ -34,7 +34,7 @@ def csv_parser(csv_file) -> list[dict]:
                 parsed_row[key] = expected_type[key](value)
             except:
                 raise Exception(
-                    f'Inccorect data type, {key} should be of type {expected_type[key].__name__} current value: {value}'
+                    f'Incorrect data type, {key} should be of type {expected_type[key].__name__} current value: {value}'
                 )
         athletes.append(Athlete(**parsed_row).to_dict())
 
