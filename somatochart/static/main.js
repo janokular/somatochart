@@ -65,6 +65,13 @@ function loadChartData() {
         colors: ["transparent"],
         exporting: {
           enabled: true,
+          chartOptions: {
+            title: {
+              style: {
+                color: "#ffffff",
+              },
+            },
+          },
           buttons: {
             contextButton: {
               enabled: false,
