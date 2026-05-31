@@ -68,7 +68,7 @@ function loadChartData() {
           chartOptions: {
             title: {
               style: {
-                color: "#ffffff",
+                color: "#00000000",
               },
             },
           },
