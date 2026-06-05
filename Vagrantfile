@@ -39,5 +39,8 @@ Vagrant.configure("2") do |config|
       systemctl start mongod
       systemctl enable mongod
     SHELL
+
+    somatochart.vm.provision "docker" do |docker|
+    end
   end
 end
