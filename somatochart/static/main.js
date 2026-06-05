@@ -88,7 +88,6 @@ function loadChartData() {
               pointFormat: "x: <b>{point.x}</b><br/>y: <b> {point.y}</b><br/>",
             },
             data: athletes.map((a) => ({
-              _id: a._id,
               x: a.x,
               y: a.y,
               name: a.name,

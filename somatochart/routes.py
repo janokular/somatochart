@@ -19,7 +19,7 @@ def index():
 def get_athletes():
     try:
         athletes = list(
-            mongo.db.athletes.find({}, {'_id': 0})
+            mongo.db.athletes.find({})
         )
         return jsonify(athletes), 200
     except Exception as e:
