@@ -54,17 +54,17 @@ class Athlete:
 
         if MIN_ENDO_MESO_ECTO < self.endo > MAX_ENDO_MESO_ECTO:
             raise Exception(
-                f'Incorrect endo value, it must be in range from {MIN_ENDO_MESO_ECTO} to {MAX_ENDO_MESO_ECTO}, current value: {self.endo}'
+                f'{self.name} has incorrect ENDO value, it must be in range from {MIN_ENDO_MESO_ECTO} to {MAX_ENDO_MESO_ECTO}, current value: {self.endo}'
             )
         
         if MIN_ENDO_MESO_ECTO < self.meso > MAX_ENDO_MESO_ECTO:
             raise Exception(
-                f'Incorrect meso value, it must be in range from {MIN_ENDO_MESO_ECTO} to {MAX_ENDO_MESO_ECTO}, current value: {self.meso}'
+                f'{self.name} has incorrect MESO value, it must be in range from {MIN_ENDO_MESO_ECTO} to {MAX_ENDO_MESO_ECTO}, current value: {self.meso}'
             )
         
         if MIN_ENDO_MESO_ECTO < self.ecto > MAX_ENDO_MESO_ECTO:
             raise Exception(
-                f'Incorect ecto value, it must be in range from {MIN_ENDO_MESO_ECTO} to {MAX_ENDO_MESO_ECTO}, current value: {self.ecto}'
+                f'{self.name} has incorect ECTO value, it must be in range from {MIN_ENDO_MESO_ECTO} to {MAX_ENDO_MESO_ECTO}, current value: {self.ecto}'
             )
         
         if self.color not in SUPPORTED_COLORS:

@@ -131,8 +131,17 @@ document.addEventListener("DOMContentLoaded", function () {
       method: "POST",
       body: formData,
     })
-      .then((response) => response.text())
-      .then(() => loadChartData());
+      .then(async (response) => {
+        if (!response.ok) {
+          const data = await response.json();
+          throw new Error(data.error);
+        }
+        return response.text();
+      })
+      .then(() => loadChartData())
+      .catch((error) => {
+        alert(error.message);
+      });
   });
 
   clearBtn.addEventListener("click", () => {
