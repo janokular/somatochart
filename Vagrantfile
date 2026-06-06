@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
       # Install requirements.txt
       pip install -r /vagrant/requirements.txt
 
-      # Deactivate virtual environment
+      # Deactivate the virtual environment
       deactivate
 
       # Import the public key
@@ -39,7 +39,7 @@ Vagrant.configure("2") do |config|
       systemctl start mongod
       systemctl enable mongod
 
-      # Set up environment variables for the project
+      # Set up the environment variables for the project
       echo 'FLASK_MONGO_URI=mongodb://localhost:27017/somatochart' | sudo tee -a /etc/environment
       echo 'FLASK_APP=somatochart' | sudo tee -a /etc/environment
       echo 'FLASK_DEBUG=True' | sudo tee -a /etc/environment
