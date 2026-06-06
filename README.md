@@ -32,20 +32,3 @@ endo,meso,ecto,name,color,symbol
 .
 .
 ```
-
-### curl
-#### Get all athletes
-```
-curl -X GET http://localhost:5001/athletes
-```
-
-#### Add athletes from CSV file
-```
-curl -X POST http://localhost:5001/athletes \
-     -F "file=@athletes.csv;type=text/csv"
-```
-
-#### Delete all athletes
-```
-curl -X DELETE http://localhost:5001/athletes
-```
