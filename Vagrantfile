@@ -29,7 +29,7 @@ Vagrant.configure("2") do |config|
 
       # Create the list file
       echo "deb [ signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] http://repo.mongodb.org/apt/debian bookworm/mongodb-org/8.0 main" | \
-          tee /etc/apt/sources.list.d/mongodb-org-8.0.list
+          sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
 
       # Install MongoDB
       apt-get update
@@ -38,6 +38,13 @@ Vagrant.configure("2") do |config|
       # Start and enable MongoDB
       systemctl start mongod
       systemctl enable mongod
+
+      # Set up environment variables for the project
+      echo 'FLASK_MONGO_URI=mongodb://localhost:27017/somatochart' | sudo tee -a /etc/environment
+      echo 'FLASK_APP=somatochart' | sudo tee -a /etc/environment
+      echo 'FLASK_DEBUG=True' | sudo tee -a /etc/environment
+      echo 'FLASK_RUN_HOST=0.0.0.0' | sudo tee -a /etc/environment
+      echo 'FLASK_RUN_PORT=5001' | sudo tee -a /etc/environment
     SHELL
 
     somatochart.vm.provision "docker" do |docker|
