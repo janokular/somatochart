@@ -10,7 +10,7 @@ flask run
 
 ### CSV file requirements
 ```
-# CSV file is expected to have following header (order does not matter)
+# CSV file is expected to have the following header (order does not matter)
 endo,meso,ecto,name,color,symbol
 ```
 
