@@ -40,11 +40,11 @@ Vagrant.configure("2") do |config|
       systemctl enable mongod
 
       # Set up the environment variables for the project
-      echo 'FLASK_MONGO_URI=mongodb://localhost:27017/somatochart' | sudo tee -a /etc/environment
-      echo 'FLASK_APP=somatochart' | sudo tee -a /etc/environment
-      echo 'FLASK_DEBUG=True' | sudo tee -a /etc/environment
-      echo 'FLASK_RUN_HOST=0.0.0.0' | sudo tee -a /etc/environment
-      echo 'FLASK_RUN_PORT=5001' | sudo tee -a /etc/environment
+      echo "FLASK_MONGO_URI=mongodb://localhost:27017/somatochart" | sudo tee -a /etc/environment
+      echo "FLASK_APP=somatochart" | sudo tee -a /etc/environment
+      echo "FLASK_DEBUG=True" | sudo tee -a /etc/environment
+      echo "FLASK_RUN_HOST=0.0.0.0" | sudo tee -a /etc/environment
+      echo "FLASK_RUN_PORT=5001" | sudo tee -a /etc/environment
     SHELL
 
     somatochart.vm.provision "docker" do |docker|
