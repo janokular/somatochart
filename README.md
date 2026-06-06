@@ -1,5 +1,5 @@
 ## SomatoChart
-### Start the application inside Vagrant VM
+### Start the application
 ```
 vagrant up && vagrant ssh
 
