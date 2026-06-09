@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
 
       # Install Docker and Python virtual environment
       apt-get update
-      apt-get install -y docker.io python3.11-venv
+      apt-get install -y docker.io python3-venv
 
       # Start and enable Docker
       systemctl start docker
