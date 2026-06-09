@@ -25,6 +25,7 @@ Vagrant.configure("2") do |config|
       docker run --name mongodb \
         --restart unless-stopped \
         -p 27017:27017 \
+        -v mongodb_data:/data/db \
         -d mongodb/mongodb-community-server:latest-slim
 
       # Create an virtual environment
