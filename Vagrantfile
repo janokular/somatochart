@@ -21,6 +21,12 @@ Vagrant.configure("2") do |config|
       systemctl start docker
       systemctl enable docker
 
+      # Add vagrant user to the docker group
+      usermod -aG docker vagrant
+
+      # Activate changes to a group
+      newgrp docker
+
       # Run MongoDB Docker container
       docker run --name mongodb \
         --restart unless-stopped \
