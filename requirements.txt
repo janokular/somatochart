@@ -1,3 +1,2 @@
 Flask
-Flask-PyMongo
 Python-dotenv

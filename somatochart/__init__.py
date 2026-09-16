@@ -2,7 +2,7 @@ from flask import Flask
 
 from .config import Config
 from .routes import register_blueprints
-from .db.database import mongo
+from .db import init_db_app
 
 
 def create_app():
@@ -10,6 +10,6 @@ def create_app():
     app.config.from_object(Config)
 
     register_blueprints(app)
-    mongo.init_app(app)
+    init_db_app(app)
 
     return app

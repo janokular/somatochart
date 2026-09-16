@@ -6,7 +6,14 @@ load_dotenv()
 
 
 class Config:
-    MONGO_URI = os.getenv('MONGO_URI')
+    DATABASE = os.getenv(
+        'DATABASE',
+        os.path.join(
+            os.path.dirname(__file__),
+            'instance',
+            'athletes.db'
+        )
+    )
 
     APP = os.getenv('FLASK_APP')
 

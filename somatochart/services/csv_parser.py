@@ -2,7 +2,7 @@ from csv import DictReader
 from io import TextIOWrapper
 from typing import get_type_hints
 
-from ..models.athlete import Athlete
+from ..models.athlete_model import Athlete
 
 
 def csv_parser(csv_file) -> list[dict]:

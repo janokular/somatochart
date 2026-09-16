@@ -1,15 +1,6 @@
 ## SomatoChart
 ### Start the application
-> [!WARNING]
-> **Docker required**
 ```shell
-# Run the MongoDB Docker container
-docker run -d --rm \
-  --name mongodb \
-  -p 27017:27017 \
-  -v mongodb_data:/data/db \
-  mongo:4.4
-
 # Create an virtual environment
 python3 -m venv .venv
 
