@@ -18,7 +18,8 @@ python3 run.py
 ```
 
 > [!IMPORTANT]
-> ### CSV file requirements
+> Use following instructions for compatible .csv files 
+### CSV file requirements
 #### Expected CSV file header
 | CSV header (order does not matter) |
 |:----------------------------------:|
