@@ -1,7 +1,7 @@
 ## SomatoChart
 ### Start the application
 > [!WARNING]
-> Docker required
+> **Docker required**
 ```shell
 # Run the MongoDB Docker container
 docker run -d --rm \
