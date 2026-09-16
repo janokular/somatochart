@@ -6,12 +6,12 @@
     <link
       rel="icon"
       type="image/svg"
-      href="{{ url_for('static', filename='images/favicon.svg') }}"
+      href="{{ url_for('static', filename='favicon.svg') }}"
     />
     <title>SomatoChart</title>
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
+      href="{{ url_for('static', filename='css/style.css') }}"
     />
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -31,6 +31,6 @@
       <button id="exportBtn">Export</button>
       <button id="clearBtn">Clear</button>
     </fieldset>
-    <script src="{{ url_for('static', filename='main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   </body>
 </html>
