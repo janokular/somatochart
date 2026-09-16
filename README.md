@@ -1,11 +1,27 @@
 ## SomatoChart
 ### Start the application
-```
-vagrant up && vagrant ssh
+```shell
+# Run the MongoDB Docker container
+docker run -d --rm \
+  --name mongodb \
+  -p 27017:27017 \
+  -v mongodb_data:/data/db \
+  mongo:4.4
 
-cd /vagrant
+# Create an virtual environment
+python3 -m venv .venv
+
+# Activate the virtual environment
 . ./.venv/bin/activate
+
+# Install requirements.txt
+pip3 install -r requirements.txt
+
+# Run the application with Flack CLI
 flask run
+
+# Or run it from the project directory
+python3 run.py
 ```
 
 ### CSV file requirements
