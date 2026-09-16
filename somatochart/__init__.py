@@ -1,15 +1,15 @@
 from flask import Flask
 
 from .config import Config
-from .routes import main
-from .db import mongo
+from .routes import register_blueprints
+from .db.database import mongo
 
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
-    app.register_blueprint(main)
 
+    register_blueprints(app)
     mongo.init_app(app)
 
     return app

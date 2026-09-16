@@ -3,19 +3,19 @@ from flask import request
 from flask import render_template
 from flask import jsonify
 
-from .db import mongo
-from .csv_parser import csv_parser
+from ..db.database import mongo
+from ..services.csv_parser import csv_parser
 
 
-main = Blueprint('routes', __name__)
+index_bp = Blueprint('bp', __name__)
 
 
-@main.route('/')
+@index_bp.route('/')
 def index():
     return render_template('index.html')
 
 
-@main.route('/athletes', methods=['GET'])
+@index_bp.route('/athletes', methods=['GET'])
 def get_athletes():
     athletes = list(
         mongo.db.athletes.find({})
@@ -23,7 +23,7 @@ def get_athletes():
     return jsonify(athletes), 200
 
 
-@main.route('/athletes', methods=['DELETE'])
+@index_bp.route('/athletes', methods=['DELETE'])
 def delete_athletes():
     if mongo.db.athletes.count_documents({}) == 0:
         return jsonify(msg='Database is already cleared'), 200
@@ -34,7 +34,7 @@ def delete_athletes():
         return jsonify(msg='Database cleared successfully'), 200
 
 
-@main.route('/athletes', methods=['POST'])
+@index_bp.route('/athletes', methods=['POST'])
 def add_athletes_from_csv():
     try:
         csv_file = request.files['file']
